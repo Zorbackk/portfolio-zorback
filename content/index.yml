@@ -1,0 +1,44 @@
+hero:
+  name: "Alex"
+  title: "Développeur Full-Stack"
+  description: "Passionné par la création d'expériences web modernes et performantes"
+  image: "/images/profile.jpg"  # On mettra la vraie photo plus tard
+  buttons:
+    - text: "Voir mes projets 🚀"
+      to: "/projects"
+      variant: "solid"
+    - text: "Me contacter 📧"
+      to: "/contact" 
+      variant: "outline"
+
+technologies:
+  title: "Technologies que j'utilise"
+  items:
+    - name: "Vue.js"
+      icon: "💚"
+      category: "frontend"
+    - name: "React" 
+      icon: "⚛️"
+      category: "frontend"
+    - name: "Node.js"
+      icon: "🟢"
+      category: "backend"
+    - name: "TypeScript"
+      icon: "🔷"
+      category: "language"
+    - name: "Python"
+      icon: "🐍"
+      category: "language"
+    - name: "Docker"
+      icon: "🐳"
+      category: "devops"
+    - name: "PostgreSQL"
+      icon: "🐘"
+      category: "database"
+    - name: "AWS"
+      icon: "☁️"
+      category: "cloud"
+
+seo:
+  title: "Alex - Développeur Full-Stack"
+  description: "Portfolio de Alex, développeur Full-Stack passionné par les technologies web modernes"
