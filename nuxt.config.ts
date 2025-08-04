@@ -7,8 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/content', 
     '@nuxt/image',
-    '@nuxt/icon',
-    '@nuxt/eslint'
+    '@nuxt/icon'
   ],
 
   // SEO et métadonnées
