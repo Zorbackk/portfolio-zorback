@@ -4,10 +4,7 @@
   <div>
 
       <div>
-    <!-- Debug -->
-    <div class="p-2 bg-red-100 text-xs">
-      Locale actuelle: {{ $i18n.locale }}
-    </div>
+
     <!-- 🎯 Navigation globale (optionnelle) -->
     <nav class="p-4 bg-black shadow-sm flex items-center justify-between">
       <div class="flex gap-4">
