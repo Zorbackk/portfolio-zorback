@@ -24,37 +24,99 @@ useSeoMeta({
   title: page.value.title || 'About',
   description: page.value.description || 'About Alex'
 })
+
+// Modal CV
+const openModal = ref(false)
+
+// Gestion du scroll quand modal ouverte
+watch(openModal, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+})
+
 </script>
 
 <template>
   <div class="min-h-screen" v-if="page">
-    <!-- Hero Section -->
-    <section class="py-20">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 class="text-4xl font-bold mb-6">{{ page.hero?.title }}</h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{{ page.hero?.description }}</p>
-            <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">{{ page.intro?.text }}</p>
-          </div>
+<!-- Hero Section -->
+<section class="py-20">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl font-bold mb-6">{{ page.hero?.title }}</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{{ page.hero?.description }}</p>
+        <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">{{ page.intro?.text }}</p>
+      </div>
+      
+      <div class="flex justify-center">
+        <div class="relative">
+<!-- CV stylisé cliquable -->
+<div 
+  class="cursor-pointer group"
+  @click="openModal = true"
+  v-if="page.hero?.cv"
+>
+  <div class="relative">
+    <div class="w-80 h-96 bg-white rounded-xl shadow-2xl group-hover:shadow-3xl transition-all duration-300 group-hover:-translate-y-2 border border-gray-200">
+      <!-- Header du "document" -->
+      <div class="h-16 bg-blue-500 rounded-t-xl flex items-center justify-center">
+        <UIcon name="i-heroicons-user-circle" class="text-3xl text-white mr-2" />
+        <span class="text-white font-bold">CV</span>
+      </div>
+      
+      <!-- "Lignes" du document -->
+      <div class="p-6 space-y-3">
+        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+        <div class="h-4 bg-gray-200 rounded w-full"></div>
+        <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+        <div class="h-4 bg-gray-300 rounded w-5/6"></div>
+        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+        <div class="h-4 bg-gray-200 rounded w-full"></div>
+      </div>
+      
+      <!-- Badge "Click" -->
+      <div class="absolute bottom-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm group-hover:bg-blue-600">
+        {{ locale === 'fr' ? 'Voir' : 'View' }}
+      </div>
+    </div>
+  </div>
+</div>
           
-          <div class="flex justify-center">
-            <div class="relative">
-              <NuxtImg 
-                :src="page.hero?.image || '/images/placeholder-profile.jpg'"
-                :alt="locale === 'fr' ? 'Photo de profil' : 'Profile picture'"
-                class="w-80 h-80 rounded-2xl object-cover shadow-2xl"
-                width="320"
-                height="320"
-              />
-              <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500 rounded-2xl flex items-center justify-center">
-                <UIcon name="i-heroicons-code-bracket" class="text-3xl text-white" />
-              </div>
+          <!-- Fallback si pas de CV -->
+          <div v-else>
+            <NuxtImg 
+              src="/images/placeholder-profile.jpg"
+              :alt="locale === 'fr' ? 'Photo de profil' : 'Profile picture'"
+              class="w-80 h-80 rounded-2xl object-cover shadow-2xl"
+              width="320"
+              height="320"
+            />
+            <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500 rounded-2xl flex items-center justify-center">
+              <UIcon name="i-heroicons-code-bracket" class="text-3xl text-white" />
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    
+    <!-- Bouton téléchargement CV -->
+    <div class="text-center mt-12" v-if="page.hero?.cv">
+      <UButton 
+        :to="page.hero.cv.pdf"
+        target="_blank"
+        variant="outline"
+        size="lg"
+        icon="i-heroicons-arrow-down-tray"
+        class="group"
+      >
+        {{ locale === 'fr' ? 'Télécharger mon CV' : 'Download my CV' }}
+      </UButton>
+    </div>
+  </div>
+</section>
 
     <!-- Parcours -->
     <section class="py-16 bg-gray-50 dark:bg-gray-800" v-if="page.journey?.items">
@@ -202,4 +264,59 @@ useSeoMeta({
       </h1>
     </div>
   </div>
+
+<!-- Modal CV -->
+<div 
+  v-if="openModal" 
+  class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+  @click="openModal = false"
+>
+  <!-- Contenu de la modal -->
+  <div 
+    class="relative w-full max-w-5xl max-h-full flex flex-col items-center"
+    @click.stop
+  >
+    <!-- Header modal avec boutons -->
+    <div class="flex justify-between items-center w-full mb-4">
+      <h3 class="text-white text-xl font-semibold">
+        {{ page?.hero?.cv?.alt }}
+      </h3>
+      
+      <div class="flex gap-4">
+        <!-- Bouton télécharger -->
+        <UButton 
+          :to="page?.hero?.cv?.pdf"
+          target="_blank"
+          variant="white"
+          size="sm"
+          icon="i-heroicons-arrow-down-tray"
+        >
+          {{ locale === 'fr' ? 'Télécharger' : 'Download' }}
+        </UButton>
+        
+        <!-- Bouton fermer -->
+        <button 
+          @click="openModal = false"
+          class="text-white hover:text-gray-300 transition-colors text-2xl"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+    
+    <!-- CV agrandi -->
+    <div class="w-full flex justify-center overflow-auto">
+      <img 
+      :src="page?.hero?.cv?.preview" 
+      :alt="page?.hero?.cv?.alt"
+        class="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
+      >
+    </div>
+    
+    <!-- Instructions -->
+    <p class="text-gray-300 text-sm mt-4 text-center">
+      {{ locale === 'fr' ? 'Cliquez en dehors ou appuyez sur Échap pour fermer' : 'Click outside or press Escape to close' }}
+    </p>
+  </div>
+</div>
 </template>

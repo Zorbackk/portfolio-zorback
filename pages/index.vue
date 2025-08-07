@@ -33,11 +33,11 @@ useSeoMeta({
         
         <!-- Photo -->
         <div class="mb-8" v-if="page.hero?.image">
-          <img 
-            :src="page.hero.image" 
-            :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
-            class="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
-          >
+            <img 
+              :src="page.hero.image" 
+              :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
+              class="w-32 md:w-48 lg:w-64 rounded-full mx-auto shadow-lg object-cover"
+            >
         </div>
 
         <!-- Titre avec salutation dynamique -->

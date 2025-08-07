@@ -67,6 +67,17 @@ i18n: {
     }
   },
 
+  // UI et colors
+
+    ui: {
+    global: true
+  },
+
+  colorMode: {
+    preference: 'system', // Suit les préférences système
+    fallback: 'light'
+  },
+
   // Configuration des images
   image: {
     quality: 80,
