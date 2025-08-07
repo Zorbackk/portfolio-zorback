@@ -1,4 +1,3 @@
-
 export default defineNuxtConfig({
 
   compatibilityDate: '2025-08-05',
@@ -7,8 +6,10 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/content', 
     '@nuxt/image',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    '@nuxtjs/i18n',
   ],
+
 
   // SEO et métadonnées
   app: {
@@ -28,8 +29,37 @@ export default defineNuxtConfig({
     }
   },
 
+  // Plugins
+
+  plugins: [
+    '~/plugins/i18n-persistence.client.ts' 
+  ],
+
+    // Configuration Langues
+
+i18n: {
+  locales: [
+    { 
+      code: 'fr', 
+      name: 'Français',
+      file: 'fr.json'
+    },
+    { 
+      code: 'en', 
+      name: 'English', 
+      file: 'en.json'
+    }
+  ],
+    defaultLocale: 'fr',
+    strategy: 'no_prefix', 
+    detectBrowserLanguage: {
+      useCookie: false, 
+      redirectOn: 'no prefix' 
+    }
+  },
+
     // Mode statique
-  ssr: false,  // ← GitHub Pages = statique uniquement
+  ssr: false,  
 
   nitro: {
     prerender: {

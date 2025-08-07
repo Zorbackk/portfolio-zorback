@@ -1,18 +1,47 @@
 <script setup lang="ts">
-// Récupération du contenu
-const { data: page } = await useAsyncData('contact-page', () => {
-  return queryContent('/contact').findOne()
+const { locale } = useI18n()
+
+const { data: page, refresh } = await useAsyncData(`contact-page-${locale.value}`, () => {
+  return queryContent(`/${locale.value}/contact`).findOne()
+})
+
+watch(locale, async () => {
+  await refresh()
 })
 
 if (!page.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Page contact introuvable'
+    statusMessage: locale.value === 'fr' ? 'Page contact introuvable' : 'Contact page not found'
   })
 }
 
-// État du formulaire
-const form = reactive({
+// 🎯 Types définis proprement
+interface FormData {
+  name: string
+  email: string
+  subject: string
+  budget: string
+  message: string
+}
+
+interface ValidationRule {
+  required?: boolean
+  min?: number
+  max?: number
+  type?: 'email'
+  pattern?: RegExp
+  message: string
+}
+
+interface FormErrors {
+  name?: string[]
+  email?: string[]
+  subject?: string[]
+  message?: string[]
+}
+
+const form = reactive<FormData>({
   name: '',
   email: '',
   subject: '',
@@ -21,72 +50,253 @@ const form = reactive({
 })
 
 const isSubmitting = ref(false)
+const errors = ref<FormErrors>({})
 
-// Options pour les selects
-const subjectOptions = [
-  { label: '💼 Projet freelance', value: 'freelance' },
-  { label: '🏢 Opportunité CDI', value: 'job' },
-  { label: '🤝 Collaboration', value: 'collaboration' },
-  { label: '❓ Question technique', value: 'question' },
-  { label: '💬 Autre', value: 'other' }
-]
+// 🔧 Règles de validation avec typage correct
+const validationRules: Record<keyof FormData, ValidationRule[]> = {
+  name: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le nom est requis' : 'Name is required' 
+    },
+    { 
+      min: 2, 
+      message: locale.value === 'fr' ? 'Le nom doit contenir au moins 2 caractères' : 'Name must be at least 2 characters' 
+    },
+    {
+      max: 50,
+      message: locale.value === 'fr' ? 'Le nom ne peut pas dépasser 50 caractères' : 'Name cannot exceed 50 characters'
+    },
+    {
+      pattern: /^[a-zA-ZÀ-ÿ\s\-']+$/,
+      message: locale.value === 'fr' ? 'Le nom ne peut contenir que des lettres, espaces, tirets et apostrophes' : 'Name can only contain letters, spaces, hyphens and apostrophes'
+    }
+  ],
+  email: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'L\'email est requis' : 'Email is required' 
+    },
+    {
+      type: 'email',
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: locale.value === 'fr' ? 'Adresse email invalide' : 'Invalid email address'
+    }
+  ],
+  subject: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le sujet est requis' : 'Subject is required' 
+    }
+  ],
+  message: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le message est requis' : 'Message is required' 
+    },
+    {
+      min: 10,
+      message: locale.value === 'fr' ? 'Le message doit contenir au moins 10 caractères' : 'Message must be at least 10 characters'
+    },
+    {
+      max: 1000,
+      message: locale.value === 'fr' ? 'Le message ne peut pas dépasser 1000 caractères' : 'Message cannot exceed 1000 characters'
+    }
+  ],
+  budget: [] // Pas de validation pour budget (optionnel)
+}
 
-const budgetOptions = [
-  { label: 'Moins de 1 000€', value: '<1k' },
-  { label: '1 000€ - 5 000€', value: '1k-5k' },
-  { label: '5 000€ - 10 000€', value: '5k-10k' },
-  { label: 'Plus de 10 000€', value: '>10k' },
-  { label: 'À discuter', value: 'discuss' }
-]
+// 🔍 Fonction de validation avec gestion correcte des types
+const validateField = (fieldName: keyof FormData, value: string): string[] => {
+  const fieldRules = validationRules[fieldName]
+  const fieldErrors: string[] = []
 
-// Gestion de l'envoi
-// async function onSubmit() {
-//   isSubmitting.value = true
-  
-//   try {
-//     // Simuler l'envoi (remplace par ton API)
-//     await new Promise(resolve => setTimeout(resolve, 2000))
+  for (const rule of fieldRules) {
+    // Vérification required
+    if (rule.required && (!value || value.trim() === '')) {
+      fieldErrors.push(rule.message)
+      break // Si requis et vide, pas besoin de vérifier le reste
+    }
     
-//     // Toast de succès
-//     const toast = useToast()
-//     toast.add({
-//       title: 'Message envoyé !',
-//       description: 'Je vous répondrai dans les plus brefs délais.',
-//       color: 'green'
-//     })
+    // Si pas de valeur et pas requis, on passe
+    if (!value || value.trim() === '') {
+      continue
+    }
     
-//     // Reset du formulaire
-//     Object.keys(form).forEach(key => {
-//       form[key] = ''
-//     })
+    // Vérification longueur minimum
+    if (rule.min !== undefined && value.length < rule.min) {
+      fieldErrors.push(rule.message)
+    }
     
-//   } catch (error) {
-//     const toast = useToast()
-//     toast.add({
-//       title: 'Erreur',
-//       description: 'Une erreur est survenue. Réessayez plus tard.',
-//       color: 'red'
-//     })
-//   } finally {
-//     isSubmitting.value = false
-//   }
-// }
+    // Vérification longueur maximum
+    if (rule.max !== undefined && value.length > rule.max) {
+      fieldErrors.push(rule.message)
+    }
+    
+    // Vérification pattern regex
+    if (rule.pattern && !rule.pattern.test(value)) {
+      fieldErrors.push(rule.message)
+    }
+  }
 
-// SEO
+  return fieldErrors
+}
+
+// ✅ VERSION CORRIGÉE - Validation du formulaire complet
+const validateForm = (): boolean => {
+  const formErrors: FormErrors = {}
+  let isValid = true
+
+  // 🔧 Solution propre : On définit explicitement les champs à valider
+  const fieldsWithValidation = {
+    name: form.name,
+    email: form.email,
+    subject: form.subject,
+    message: form.message
+  } as const
+
+  // 🔧 Itération sûre avec Object.entries
+  Object.entries(fieldsWithValidation).forEach(([fieldName, fieldValue]) => {
+    const typedFieldName = fieldName as keyof typeof fieldsWithValidation
+    
+    // Validation du champ
+    const fieldErrors = validateField(typedFieldName, fieldValue)
+    
+    if (fieldErrors.length > 0) {
+      // Assignation sûre des erreurs
+      switch (typedFieldName) {
+        case 'name':
+          formErrors.name = fieldErrors
+          break
+        case 'email':
+          formErrors.email = fieldErrors
+          break
+        case 'subject':
+          formErrors.subject = fieldErrors
+          break
+        case 'message':
+          formErrors.message = fieldErrors
+          break
+      }
+      isValid = false
+    }
+  })
+
+  errors.value = formErrors
+  return isValid
+}
+
+// 🧹 Sanitisation des données
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Supprime scripts
+    .replace(/<[^>]*>/g, '') // Supprime HTML
+    .trim() // Supprime espaces début/fin
+}
+
+// 📤 Soumission du formulaire
+const handleSubmit = async () => {
+  // Validation avant envoi
+  if (!validateForm()) {
+    return
+  }
+
+  isSubmitting.value = true
+
+  try {
+    // Sanitisation des données
+    const sanitizedData = {
+      name: sanitizeInput(form.name),
+      email: sanitizeInput(form.email).toLowerCase(),
+      subject: form.subject, // Select, déjà sûr
+      budget: form.budget,   // Select, déjà sûr  
+      message: sanitizeInput(form.message)
+    }
+
+    console.log('Données à envoyer:', sanitizedData)
+
+    // TODO: Remplacer par votre API
+    // const response = await $fetch('/api/contact', {
+    //   method: 'POST',
+    //   body: sanitizedData
+    // })
+
+    // Simulation d'envoi
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Réinitialiser le formulaire
+    Object.assign(form, {
+      name: '',
+      email: '',
+      subject: '',
+      budget: '',
+      message: ''
+    })
+    
+    // Reset erreurs
+    errors.value = {}
+    
+    console.log('Message envoyé avec succès!')
+
+  } catch (error) {
+    console.error('Erreur envoi formulaire:', error)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// 👀 Validation en temps réel - VERSION SIMPLIFIÉE
+const clearFieldError = (fieldName: keyof FormErrors) => {
+  if (errors.value[fieldName]) {
+    const newErrors = { ...errors.value }
+    delete newErrors[fieldName]
+    errors.value = newErrors
+  }
+}
+
+// Watchers simplifiés
+watch(() => form.name, (newVal) => {
+  if (errors.value.name && newVal.trim() !== '') {
+    const fieldErrors = validateField('name', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('name')
+    }
+  }
+})
+
+watch(() => form.email, (newVal) => {
+  if (errors.value.email && newVal.trim() !== '') {
+    const fieldErrors = validateField('email', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('email')
+    }
+  }
+})
+
+watch(() => form.message, (newVal) => {
+  if (errors.value.message && newVal.trim() !== '') {
+    const fieldErrors = validateField('message', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('message')
+    }
+  }
+})
+
 useSeoMeta({
-  title: page.value.title || 'Contact - Alex',
-  description: page.value.description
+  title: page.value?.title || (locale.value === 'fr' ? 'Contact - Alex' : 'Contact - Alex'),
+  description: page.value?.description
 })
 </script>
 
+
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen" v-if="page">
     <!-- Hero Section -->
     <section class="py-20 text-center">
       <div class="container mx-auto px-4">
-        <h1 class="text-4xl font-bold mb-4">{{ page?.hero?.title }}</h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          {{ page?.hero?.description }}
+        <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{{ page.hero?.title }}</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          {{ page.hero?.description }}
         </p>
       </div>
     </section>
@@ -96,21 +306,21 @@ useSeoMeta({
         
         <!-- Informations de contact -->
         <div>
-          <h2 class="text-2xl font-bold mb-8">Mes informations</h2>
+          <h2 class="text-2xl font-bold mb-8 text-gray-900 dark:text-white">{{ page.texts?.contactInfo }}</h2>
           
           <div class="space-y-6">
             <div 
-              v-for="info in page?.contact_info" 
+              v-for="info in page.contact_info" 
               :key="info.type"
-              class="flex items-center p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow"
+              class="flex items-center p-4 bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
             >
-              <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                <UIcon :name="info.icon" class="text-xl text-blue-600" />
+              <div class="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                <UIcon :name="info.icon" class="text-xl text-blue-600 dark:text-blue-400" />
               </div>
               
               <div class="flex-grow">
-                <h3 class="font-semibold text-gray-900">{{ info.label }}</h3>
-                <p class="text-gray-600">{{ info.value }}</p>
+                <h3 class="font-semibold text-gray-900 dark:text-white">{{ info.label }}</h3>
+                <p class="text-gray-600 dark:text-gray-300">{{ info.value }}</p>
               </div>
               
               <UButton 
@@ -126,73 +336,101 @@ useSeoMeta({
           </div>
           
           <!-- Disponibilité -->
-          <div class="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
+          <div class="mt-8 p-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
             <div class="flex items-center">
               <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span class="font-semibold text-green-800">Disponible pour de nouveaux projets</span>
+              <span class="font-semibold text-green-800 dark:text-green-300">{{ page.texts?.available }}</span>
             </div>
-            <p class="text-green-700 mt-2">
-              Je suis actuellement ouvert à de nouvelles opportunités freelance ou CDI.
+            <p class="text-green-700 dark:text-green-400 mt-2">
+              {{ page.texts?.availableDesc }}
             </p>
           </div>
         </div>
 
-        <!-- Formulaire de contact -->
+        <!-- Formulaire -->
         <div>
-          <h2 class="text-2xl font-bold mb-2">{{ page?.form?.title }}</h2>
-          <p class="text-gray-600 mb-8">{{ page?.form?.subtitle }}</p>
+          <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{{ page.form?.title }}</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-8">{{ page.form?.subtitle }}</p>
           
-          <UForm :state="form" @submit="onSubmit" class="space-y-6">
-            <!-- Nom -->
-            <UFormGroup label="Nom complet" name="name" required>
+          <UForm 
+            :state="form" 
+            class="space-y-6"
+            @submit="handleSubmit"
+          >
+            <UFormGroup 
+              :label="page.texts?.fullName" 
+              name="name" 
+              required
+              :error="errors.name?.[0]"
+            >
               <UInput 
                 v-model="form.name" 
-                placeholder="Votre nom complet"
+                :placeholder="page.texts?.fullNamePlaceholder"
                 size="lg"
+                maxlength="50"
+                :color="errors.name ? 'red' : 'primary'"
               />
             </UFormGroup>
 
-            <!-- Email -->
-            <UFormGroup label="Email" name="email" required>
+            <UFormGroup 
+              :label="page.texts?.email" 
+              name="email" 
+              required
+              :error="errors.email?.[0]"
+            >
               <UInput 
                 v-model="form.email" 
                 type="email" 
-                placeholder="votre@email.com"
+                :placeholder="page.texts?.emailPlaceholder"
                 size="lg"
+                autocomplete="email"
+                :color="errors.email ? 'red' : 'primary'"
               />
             </UFormGroup>
 
-            <!-- Sujet -->
-            <UFormGroup label="Sujet" name="subject" required>
+            <UFormGroup 
+              :label="page.texts?.subject" 
+              name="subject" 
+              required
+              :error="errors.subject?.[0]"
+            >
               <USelect 
                 v-model="form.subject"
-                :options="subjectOptions"
-                placeholder="Choisissez un sujet"
+                :options="page.options?.subjects"
+                :placeholder="page.texts?.subjectPlaceholder"
                 size="lg"
+                :color="errors.subject ? 'red' : 'primary'"
               />
             </UFormGroup>
 
-            <!-- Budget (optionnel) -->
-            <UFormGroup label="Budget estimé (optionnel)" name="budget">
+            <UFormGroup :label="page.texts?.budget" name="budget">
               <USelect 
                 v-model="form.budget"
-                :options="budgetOptions"
-                placeholder="Sélectionnez votre budget"
+                :options="page.options?.budgets"
+                :placeholder="page.texts?.budgetPlaceholder"
                 size="lg"
               />
             </UFormGroup>
 
-            <!-- Message -->
-            <UFormGroup label="Message" name="message" required>
+            <UFormGroup 
+              :label="page.texts?.message" 
+              name="message" 
+              required
+              :error="errors.message?.[0]"
+            >
               <UTextarea 
                 v-model="form.message" 
-                placeholder="Décrivez votre projet ou votre demande..."
+                :placeholder="page.texts?.messagePlaceholder"
                 :rows="6"
                 size="lg"
+                maxlength="1000"
+                :color="errors.message ? 'red' : 'primary'"
               />
+              <div class="text-right text-sm text-gray-500 mt-1">
+                {{ form.message.length }}/1000
+              </div>
             </UFormGroup>
 
-            <!-- Bouton d'envoi -->
             <UButton 
               type="submit" 
               :loading="isSubmitting"
@@ -201,7 +439,7 @@ useSeoMeta({
               class="w-full"
               icon="i-heroicons-paper-airplane"
             >
-              {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer le message' }}
+              {{ isSubmitting ? page.texts?.sending : page.texts?.sendMessage }}
             </UButton>
           </UForm>
         </div>
@@ -209,5 +447,3 @@ useSeoMeta({
     </div>
   </div>
 </template>
-
-

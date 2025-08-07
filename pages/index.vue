@@ -1,7 +1,14 @@
 <script setup lang="ts">
-// 🔧 MÉTHODE CORRECTE Nuxt Content v2
-const { data: page } = await useAsyncData('homepage', () => {
-  return queryContent('/').findOne()  // ← API correcte
+const { locale } = useI18n()
+
+// 🔧 Récupère le contenu selon la locale
+const { data: page, refresh } = await useAsyncData(`homepage-${locale.value}`, () => {
+  return queryContent(`/${locale.value}`).findOne()
+})
+
+// 🎯 Recharge quand la langue change
+watch(locale, async () => {
+  await refresh()
 })
 
 if (!page.value) {
@@ -33,16 +40,13 @@ useSeoMeta({
           >
         </div>
 
-        <!-- Titre -->
+        <!-- Titre avec salutation dynamique -->
         <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-          Salut, c'est 
+          {{ locale === 'fr' ? 'Salut, c\'est' : 'Hi, I\'m' }} 
           <span class="text-blue-600 dark:text-blue-400">
             {{ page.hero?.name || 'Alex' }}
           </span> 👋
         </h1>
-
-
-
 
         <!-- Subtitle -->
         <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
@@ -71,10 +75,10 @@ useSeoMeta({
         <!-- Boutons fallback -->
         <div v-else class="flex flex-col sm:flex-row gap-4 justify-center">
           <UButton to="/projects" variant="solid" size="xl" class="px-8 py-4 text-lg">
-            Voir mes projets 🚀
+            {{ locale === 'fr' ? 'Voir mes projets 🚀' : 'View my projects 🚀' }}
           </UButton>
           <UButton to="/contact" variant="outline" size="xl" class="px-8 py-4 text-lg">
-            Me contacter 📧
+            {{ locale === 'fr' ? 'Me contacter 📧' : 'Contact me 📧' }}
           </UButton>
         </div>
       </div>
@@ -108,12 +112,11 @@ useSeoMeta({
   <div v-else class="min-h-screen flex items-center justify-center">
     <div class="text-center">
       <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Chargement... 🔄
+        {{ locale === 'fr' ? 'Chargement... 🔄' : 'Loading... 🔄' }}
       </h1>
       <p class="text-gray-600 dark:text-gray-400">
-        Récupération du contenu en cours
+        {{ locale === 'fr' ? 'Récupération du contenu en cours' : 'Getting content...' }}
       </p>
     </div>
   </div>
-
 </template>
