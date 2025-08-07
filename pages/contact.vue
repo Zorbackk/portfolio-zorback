@@ -16,7 +16,32 @@ if (!page.value) {
   })
 }
 
-const form = reactive({
+// 🎯 Types définis proprement
+interface FormData {
+  name: string
+  email: string
+  subject: string
+  budget: string
+  message: string
+}
+
+interface ValidationRule {
+  required?: boolean
+  min?: number
+  max?: number
+  type?: 'email'
+  pattern?: RegExp
+  message: string
+}
+
+interface FormErrors {
+  name?: string[]
+  email?: string[]
+  subject?: string[]
+  message?: string[]
+}
+
+const form = reactive<FormData>({
   name: '',
   email: '',
   subject: '',
@@ -25,12 +50,244 @@ const form = reactive({
 })
 
 const isSubmitting = ref(false)
+const errors = ref<FormErrors>({})
+
+// 🔧 Règles de validation avec typage correct
+const validationRules: Record<keyof FormData, ValidationRule[]> = {
+  name: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le nom est requis' : 'Name is required' 
+    },
+    { 
+      min: 2, 
+      message: locale.value === 'fr' ? 'Le nom doit contenir au moins 2 caractères' : 'Name must be at least 2 characters' 
+    },
+    {
+      max: 50,
+      message: locale.value === 'fr' ? 'Le nom ne peut pas dépasser 50 caractères' : 'Name cannot exceed 50 characters'
+    },
+    {
+      pattern: /^[a-zA-ZÀ-ÿ\s\-']+$/,
+      message: locale.value === 'fr' ? 'Le nom ne peut contenir que des lettres, espaces, tirets et apostrophes' : 'Name can only contain letters, spaces, hyphens and apostrophes'
+    }
+  ],
+  email: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'L\'email est requis' : 'Email is required' 
+    },
+    {
+      type: 'email',
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: locale.value === 'fr' ? 'Adresse email invalide' : 'Invalid email address'
+    }
+  ],
+  subject: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le sujet est requis' : 'Subject is required' 
+    }
+  ],
+  message: [
+    { 
+      required: true, 
+      message: locale.value === 'fr' ? 'Le message est requis' : 'Message is required' 
+    },
+    {
+      min: 10,
+      message: locale.value === 'fr' ? 'Le message doit contenir au moins 10 caractères' : 'Message must be at least 10 characters'
+    },
+    {
+      max: 1000,
+      message: locale.value === 'fr' ? 'Le message ne peut pas dépasser 1000 caractères' : 'Message cannot exceed 1000 characters'
+    }
+  ],
+  budget: [] // Pas de validation pour budget (optionnel)
+}
+
+// 🔍 Fonction de validation avec gestion correcte des types
+const validateField = (fieldName: keyof FormData, value: string): string[] => {
+  const fieldRules = validationRules[fieldName]
+  const fieldErrors: string[] = []
+
+  for (const rule of fieldRules) {
+    // Vérification required
+    if (rule.required && (!value || value.trim() === '')) {
+      fieldErrors.push(rule.message)
+      break // Si requis et vide, pas besoin de vérifier le reste
+    }
+    
+    // Si pas de valeur et pas requis, on passe
+    if (!value || value.trim() === '') {
+      continue
+    }
+    
+    // Vérification longueur minimum
+    if (rule.min !== undefined && value.length < rule.min) {
+      fieldErrors.push(rule.message)
+    }
+    
+    // Vérification longueur maximum
+    if (rule.max !== undefined && value.length > rule.max) {
+      fieldErrors.push(rule.message)
+    }
+    
+    // Vérification pattern regex
+    if (rule.pattern && !rule.pattern.test(value)) {
+      fieldErrors.push(rule.message)
+    }
+  }
+
+  return fieldErrors
+}
+
+// ✅ VERSION CORRIGÉE - Validation du formulaire complet
+const validateForm = (): boolean => {
+  const formErrors: FormErrors = {}
+  let isValid = true
+
+  // 🔧 Solution propre : On définit explicitement les champs à valider
+  const fieldsWithValidation = {
+    name: form.name,
+    email: form.email,
+    subject: form.subject,
+    message: form.message
+  } as const
+
+  // 🔧 Itération sûre avec Object.entries
+  Object.entries(fieldsWithValidation).forEach(([fieldName, fieldValue]) => {
+    const typedFieldName = fieldName as keyof typeof fieldsWithValidation
+    
+    // Validation du champ
+    const fieldErrors = validateField(typedFieldName, fieldValue)
+    
+    if (fieldErrors.length > 0) {
+      // Assignation sûre des erreurs
+      switch (typedFieldName) {
+        case 'name':
+          formErrors.name = fieldErrors
+          break
+        case 'email':
+          formErrors.email = fieldErrors
+          break
+        case 'subject':
+          formErrors.subject = fieldErrors
+          break
+        case 'message':
+          formErrors.message = fieldErrors
+          break
+      }
+      isValid = false
+    }
+  })
+
+  errors.value = formErrors
+  return isValid
+}
+
+// 🧹 Sanitisation des données
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Supprime scripts
+    .replace(/<[^>]*>/g, '') // Supprime HTML
+    .trim() // Supprime espaces début/fin
+}
+
+// 📤 Soumission du formulaire
+const handleSubmit = async () => {
+  // Validation avant envoi
+  if (!validateForm()) {
+    return
+  }
+
+  isSubmitting.value = true
+
+  try {
+    // Sanitisation des données
+    const sanitizedData = {
+      name: sanitizeInput(form.name),
+      email: sanitizeInput(form.email).toLowerCase(),
+      subject: form.subject, // Select, déjà sûr
+      budget: form.budget,   // Select, déjà sûr  
+      message: sanitizeInput(form.message)
+    }
+
+    console.log('Données à envoyer:', sanitizedData)
+
+    // TODO: Remplacer par votre API
+    // const response = await $fetch('/api/contact', {
+    //   method: 'POST',
+    //   body: sanitizedData
+    // })
+
+    // Simulation d'envoi
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Réinitialiser le formulaire
+    Object.assign(form, {
+      name: '',
+      email: '',
+      subject: '',
+      budget: '',
+      message: ''
+    })
+    
+    // Reset erreurs
+    errors.value = {}
+    
+    console.log('Message envoyé avec succès!')
+
+  } catch (error) {
+    console.error('Erreur envoi formulaire:', error)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// 👀 Validation en temps réel - VERSION SIMPLIFIÉE
+const clearFieldError = (fieldName: keyof FormErrors) => {
+  if (errors.value[fieldName]) {
+    const newErrors = { ...errors.value }
+    delete newErrors[fieldName]
+    errors.value = newErrors
+  }
+}
+
+// Watchers simplifiés
+watch(() => form.name, (newVal) => {
+  if (errors.value.name && newVal.trim() !== '') {
+    const fieldErrors = validateField('name', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('name')
+    }
+  }
+})
+
+watch(() => form.email, (newVal) => {
+  if (errors.value.email && newVal.trim() !== '') {
+    const fieldErrors = validateField('email', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('email')
+    }
+  }
+})
+
+watch(() => form.message, (newVal) => {
+  if (errors.value.message && newVal.trim() !== '') {
+    const fieldErrors = validateField('message', newVal)
+    if (fieldErrors.length === 0) {
+      clearFieldError('message')
+    }
+  }
+})
 
 useSeoMeta({
-  title: page.value.title || (locale.value === 'fr' ? 'Contact - Alex' : 'Contact - Alex'),
-  description: page.value.description
+  title: page.value?.title || (locale.value === 'fr' ? 'Contact - Alex' : 'Contact - Alex'),
+  description: page.value?.description
 })
 </script>
+
 
 <template>
   <div class="min-h-screen" v-if="page">
@@ -95,30 +352,54 @@ useSeoMeta({
           <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{{ page.form?.title }}</h2>
           <p class="text-gray-600 dark:text-gray-300 mb-8">{{ page.form?.subtitle }}</p>
           
-          <UForm :state="form" class="space-y-6">
-            <UFormGroup :label="page.texts?.fullName" name="name" required>
+          <UForm 
+            :state="form" 
+            class="space-y-6"
+            @submit="handleSubmit"
+          >
+            <UFormGroup 
+              :label="page.texts?.fullName" 
+              name="name" 
+              required
+              :error="errors.name?.[0]"
+            >
               <UInput 
                 v-model="form.name" 
                 :placeholder="page.texts?.fullNamePlaceholder"
                 size="lg"
+                maxlength="50"
+                :color="errors.name ? 'red' : 'primary'"
               />
             </UFormGroup>
 
-            <UFormGroup :label="page.texts?.email" name="email" required>
+            <UFormGroup 
+              :label="page.texts?.email" 
+              name="email" 
+              required
+              :error="errors.email?.[0]"
+            >
               <UInput 
                 v-model="form.email" 
                 type="email" 
                 :placeholder="page.texts?.emailPlaceholder"
                 size="lg"
+                autocomplete="email"
+                :color="errors.email ? 'red' : 'primary'"
               />
             </UFormGroup>
 
-            <UFormGroup :label="page.texts?.subject" name="subject" required>
+            <UFormGroup 
+              :label="page.texts?.subject" 
+              name="subject" 
+              required
+              :error="errors.subject?.[0]"
+            >
               <USelect 
                 v-model="form.subject"
                 :options="page.options?.subjects"
                 :placeholder="page.texts?.subjectPlaceholder"
                 size="lg"
+                :color="errors.subject ? 'red' : 'primary'"
               />
             </UFormGroup>
 
@@ -131,13 +412,23 @@ useSeoMeta({
               />
             </UFormGroup>
 
-            <UFormGroup :label="page.texts?.message" name="message" required>
+            <UFormGroup 
+              :label="page.texts?.message" 
+              name="message" 
+              required
+              :error="errors.message?.[0]"
+            >
               <UTextarea 
                 v-model="form.message" 
                 :placeholder="page.texts?.messagePlaceholder"
                 :rows="6"
                 size="lg"
+                maxlength="1000"
+                :color="errors.message ? 'red' : 'primary'"
               />
+              <div class="text-right text-sm text-gray-500 mt-1">
+                {{ form.message.length }}/1000
+              </div>
             </UFormGroup>
 
             <UButton 

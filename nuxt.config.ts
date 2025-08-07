@@ -29,6 +29,12 @@ export default defineNuxtConfig({
     }
   },
 
+  // Plugins
+
+  plugins: [
+    '~/plugins/i18n-persistence.client.ts' 
+  ],
+
     // Configuration Langues
 
 i18n: {
@@ -44,12 +50,16 @@ i18n: {
       file: 'en.json'
     }
   ],
-  defaultLocale: 'fr',
-  strategy: 'prefix_except_default'
-},
+    defaultLocale: 'fr',
+    strategy: 'no_prefix', 
+    detectBrowserLanguage: {
+      useCookie: false, 
+      redirectOn: 'no prefix' 
+    }
+  },
 
     // Mode statique
-  ssr: false,  // ← GitHub Pages = statique uniquement
+  ssr: false,  
 
   nitro: {
     prerender: {
