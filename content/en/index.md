@@ -3,7 +3,7 @@ hero:
   name: "Alex"
   title: "Full-Stack Developer"
   description: "Passionate about creating modern and performant web experiences"
-  image: "/images/profile.jpg"
+  image: "/images/PP.jpg"
   buttons:
     - text: "View my projects 🚀"
       to: "/projects"

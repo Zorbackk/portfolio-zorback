@@ -27,80 +27,149 @@ useSeoMeta({
 
 <template> 
   <div v-if="page">
-    <!-- 🎯 HERO SECTION -->
-    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        
-        <!-- Photo -->
-        <div class="mb-8" v-if="page.hero?.image">
-            <img 
-              :src="page.hero.image" 
-              :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
-              class="w-32 md:w-48 lg:w-64 rounded-full mx-auto shadow-lg object-cover"
+    <!-- 🔥 HERO SECTION TECH -->
+    <section class="relative min-h-screen tech-bg grid-pattern flex items-center overflow-hidden">
+      <!-- Particules d'arrière-plan -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
+        <div class="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-pulse opacity-80"></div>
+        <div class="absolute bottom-1/4 left-2/3 w-3 h-3 bg-green-400 rounded-full animate-bounce opacity-40"></div>
+        <div class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse opacity-70"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          
+          <!-- Photo Tech (si elle existe) -->
+          <div class="mb-8" v-if="page.hero?.image">
+            <div class="relative inline-block">
+              <div class="w-32 md:w-48 lg:w-64 h-32 md:h-48 lg:h-64 mx-auto relative">
+                <!-- Cadre tech autour de la photo -->
+                <div class="absolute inset-0 rounded-full border-2 border-cyan-400 animate-pulse"></div>
+                <div class="absolute inset-2 rounded-full border border-purple-400 opacity-60"></div>
+                
+                <img 
+                  :src="page.hero.image" 
+                  :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
+                  class="w-full h-full rounded-full object-cover shadow-2xl relative z-10"
+                >
+                
+                <!-- Coins tech -->
+                <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-cyan-400"></div>
+                <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-purple-400"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Titre avec effet tech -->
+          <div class="mb-8">
+            <p class="font-mono text-cyan-400 text-sm mb-2 tracking-wider">
+              > {{ locale === 'fr' ? 'Initialisation du portfolio...' : 'Portfolio initialization...' }}
+            </p>
+            
+            <h1 class="font-tech text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+              {{ locale === 'fr' ? 'Salut, c\'est' : 'Hi, I\'m' }} 
+              <span class="gradient-text pulse-neon">
+                {{ page.hero?.name || 'Alex' }}
+              </span>
+              <span class="text-2xl md:text-4xl animate-wave inline-block ml-2">👋</span>
+            </h1>
+            
+            <!-- Ligne de séparation tech -->
+            <div class="flex justify-center items-center space-x-4 mb-6">
+              <div class="h-px w-20 bg-gradient-to-r from-transparent to-cyan-400"></div>
+              <div class="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+              <div class="h-px w-20 bg-gradient-to-l from-transparent to-purple-400"></div>
+            </div>
+          </div>
+
+          <!-- Subtitle Tech -->
+          <h2 class="font-tech text-xl md:text-2xl lg:text-3xl font-semibold text-gray-200 mb-4">
+            <span class="text-purple-400">></span> {{ page.hero?.title || 'Développeur Full-Stack' }}
+          </h2>
+
+          <!-- Description -->
+          <p class="font-mono text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            {{ page.hero?.description || 'Passionné par la création d\'expériences web modernes' }}
+          </p>
+
+          <!-- Boutons Tech -->
+          <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
+            <button 
+              v-for="(button, index) in page.hero.buttons"
+              :key="index"
+              class="group glow-box px-8 py-4 rounded-lg font-tech font-semibold text-cyan-400 hover:text-black hover:bg-cyan-400 transition-all duration-300 glitch border border-cyan-400"
             >
+              <span class="flex items-center justify-center gap-2">
+                {{ button.text }}
+                <UIcon name="i-heroicons-arrow-right" class="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+          </div>
+
+          <!-- Boutons fallback -->
+          <div v-else class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <button class="group glow-box px-8 py-4 rounded-lg font-tech font-semibold text-cyan-400 hover:text-black hover:bg-cyan-400 transition-all duration-300 glitch border border-cyan-400">
+              <span class="flex items-center justify-center gap-2">
+                {{ locale === 'fr' ? 'Voir mes projets' : 'View my projects' }}
+                <span class="text-lg">🚀</span>
+              </span>
+            </button>
+            
+            <button class="group border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-lg font-tech transition-all duration-300">
+              <span class="flex items-center justify-center gap-2">
+                {{ locale === 'fr' ? 'Me contacter' : 'Contact me' }}
+                <span class="text-lg">📧</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Status Bar Tech -->
+          <div class="flex justify-center">
+            <div class="glow-box px-6 py-3 rounded-full font-mono text-sm">
+              <span class="text-green-400">●</span>
+              <span class="text-gray-300 ml-2">{{ locale === 'fr' ? 'Disponible pour de nouveaux projets' : 'Available for new projects' }}</span>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Titre avec salutation dynamique -->
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-          {{ locale === 'fr' ? 'Salut, c\'est' : 'Hi, I\'m' }} 
-          <span class="text-blue-600 dark:text-blue-400">
-            {{ page.hero?.name || 'Alex' }}
-          </span> 👋
-        </h1>
-
-        <!-- Subtitle -->
-        <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
-          {{ page.hero?.title || 'Développeur Full-Stack' }}
-        </h2>
-
-        <!-- Description -->
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          {{ page.hero?.description || 'Passionné par la création d\'expériences web modernes' }}
-        </p>
-
-        <!-- Boutons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
-          <UButton 
-            v-for="(button, index) in page.hero.buttons"
-            :key="index"
-            :to="button.to"
-            :variant="button.variant"
-            size="xl" 
-            class="px-8 py-4 text-lg"
-          >
-            {{ button.text }}
-          </UButton>
+      <!-- Scroll indicator tech -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center animate-bounce">
+        <div class="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center opacity-60">
+          <div class="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
         </div>
-
-        <!-- Boutons fallback -->
-        <div v-else class="flex flex-col sm:flex-row gap-4 justify-center">
-          <UButton to="/projects" variant="solid" size="xl" class="px-8 py-4 text-lg">
-            {{ locale === 'fr' ? 'Voir mes projets 🚀' : 'View my projects 🚀' }}
-          </UButton>
-          <UButton to="/contact" variant="outline" size="xl" class="px-8 py-4 text-lg">
-            {{ locale === 'fr' ? 'Me contacter 📧' : 'Contact me 📧' }}
-          </UButton>
-        </div>
+        <p class="font-mono text-xs text-gray-500 mt-2">scroll_down</p>
       </div>
     </section>
 
-    <!-- 🔧 TECHNOLOGIES SECTION -->
-    <section class="py-20 bg-white dark:bg-gray-900" v-if="page.technologies?.items && page.technologies.items.length > 0">
+    <!-- 🔧 TECHNOLOGIES SECTION TECH -->
+    <section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
       <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          {{ page.technologies?.title || 'Technologies' }}
-        </h2>
+        <div class="text-center mb-16">
+          <p class="font-mono text-cyan-400 text-sm mb-2">> loading tech_stack...</p>
+          <h2 class="font-tech text-3xl md:text-4xl font-bold text-white mb-4">
+            {{ page.technologies?.title || 'Technologies' }}
+          </h2>
+          <div class="w-24 h-px bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto"></div>
+        </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <div 
             v-for="(tech, index) in page.technologies.items"
             :key="index"
-            class="group"
+            class="group glow-box p-6 rounded-lg hover:scale-105 transition-all duration-300 text-center"
           >
-            <div class="p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-105 bg-white dark:bg-gray-800">
-              <div class="text-4xl mb-3 text-center">{{ tech.icon || '🔧' }}</div>
-              <h3 class="font-semibold text-gray-900 dark:text-white mb-2 text-center">{{ tech.name || 'Tech' }}</h3>
-              <span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide block text-center">{{ tech.category || 'tech' }}</span>
+            <div class="text-4xl mb-4 group-hover:animate-pulse">{{ tech.icon || '🔧' }}</div>
+            <h3 class="font-tech font-semibold text-white mb-2">{{ tech.name || 'Tech' }}</h3>
+            <span class="font-mono text-xs text-cyan-400 uppercase tracking-wider">
+              {{ tech.category || 'tech' }}
+            </span>
+            
+            <!-- Progress bar effect -->
+            <div class="mt-3 w-full bg-gray-700 rounded-full h-1">
+              <div class="bg-gradient-to-r from-cyan-400 to-purple-400 h-1 rounded-full group-hover:animate-pulse" 
+                   :style="{ width: '85%' }"></div>
             </div>
           </div>
         </div>
@@ -108,15 +177,37 @@ useSeoMeta({
     </section>
   </div>
 
-  <!-- 🚨 FALLBACK si pas de données -->
-  <div v-else class="min-h-screen flex items-center justify-center">
+  <!-- 🚨 FALLBACK TECH -->
+  <!-- <div v-else class="min-h-screen tech-bg flex items-center justify-center">
     <div class="text-center">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        {{ locale === 'fr' ? 'Chargement... 🔄' : 'Loading... 🔄' }}
-      </h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        {{ locale === 'fr' ? 'Récupération du contenu en cours' : 'Getting content...' }}
-      </p>
+      <div class="glow-box p-8 rounded-xl">
+        <div class="animate-spin w-12 h-12 border-2 border-cyan-400 border-t-transparent rounded-full mx-auto mb-4"></div>
+        <h1 class="font-tech text-2xl font-bold text-white mb-4">
+          {{ locale === 'fr' ? 'Loading System..." : 'Loading System...' }}
+        </h1>
+        <p class="font-mono text-gray-400">
+          {{ locale === 'fr' ? '> Récupération des données...' : '> Fetching data...' }}
+        </p>
+      </div>
     </div>
-  </div>
+  </div> -->
 </template>
+
+<style scoped>
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+}
+
+.animate-wave {
+  animation: wave 1s ease-in-out;
+}
+
+.animate-wave:hover {
+  animation: wave 0.6s ease-in-out infinite;
+}
+</style>
