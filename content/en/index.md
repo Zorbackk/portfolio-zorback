@@ -16,17 +16,25 @@ technologies:
   title: "Technologies I use"
   items:
     - name: "Vue.js"
-      icon: "💚"
+      logo: "/images/logos/vue.svg"
       category: "frontend"
-    - name: "React" 
-      icon: "⚛️"
+      level: 4
+      badges: ["SPA", "SSR"]
+    - name: "Javascript"
+      logo: "/images/logos/vue.svg"
       category: "frontend"
-    - name: "Node.js"
-      icon: "🟢"
+      level: 4
+      badges: ["SPA", "SSR"]
+    - name: "Java"
+      logo: "/images/logos/vue.svg"
       category: "backend"
-    - name: "TypeScript"
-      icon: "🔷"
-      category: "language"
+      level: 4
+      badges: ["SPA", "SSR"]
+    - name: "Spring Boot"
+      logo: "/images/logos/vue.svg"
+      category: "backend"
+      level: 4
+      badges: ["SPA", "SSR"]
 
 seo:
   title: "Alex - Full-Stack Developer"

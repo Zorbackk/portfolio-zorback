@@ -27,16 +27,8 @@ useSeoMeta({
 
 <template> 
   <div v-if="page">
-    <!-- 🔥 HERO SECTION TECH -->
+    <!-- 🔥 HERO SECTION TECH - SANS PARTICULES -->
     <section class="relative min-h-screen tech-bg grid-pattern flex items-center overflow-hidden">
-      <!-- Particules d'arrière-plan -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
-        <div class="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-pulse opacity-80"></div>
-        <div class="absolute bottom-1/4 left-2/3 w-3 h-3 bg-green-400 rounded-full animate-bounce opacity-40"></div>
-        <div class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse opacity-70"></div>
-      </div>
-
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
           
@@ -134,16 +126,9 @@ useSeoMeta({
         </div>
       </div>
 
-      <!-- Scroll indicator tech -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center animate-bounce">
-        <div class="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center opacity-60">
-          <div class="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
-        </div>
-        <p class="font-mono text-xs text-gray-500 mt-2">scroll_down</p>
-      </div>
     </section>
 
-    <!-- 🔧 TECHNOLOGIES SECTION TECH -->
+    <!-- 🔧 TECHNOLOGIES SECTION AVEC COMPONENT -->
     <section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16">
@@ -155,42 +140,16 @@ useSeoMeta({
         </div>
         
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div 
+          <TechCard 
             v-for="(tech, index) in page.technologies.items"
             :key="index"
-            class="group glow-box p-6 rounded-lg hover:scale-105 transition-all duration-300 text-center"
-          >
-            <div class="text-4xl mb-4 group-hover:animate-pulse">{{ tech.icon || '🔧' }}</div>
-            <h3 class="font-tech font-semibold text-white mb-2">{{ tech.name || 'Tech' }}</h3>
-            <span class="font-mono text-xs text-cyan-400 uppercase tracking-wider">
-              {{ tech.category || 'tech' }}
-            </span>
-            
-            <!-- Progress bar effect -->
-            <div class="mt-3 w-full bg-gray-700 rounded-full h-1">
-              <div class="bg-gradient-to-r from-cyan-400 to-purple-400 h-1 rounded-full group-hover:animate-pulse" 
-                   :style="{ width: '85%' }"></div>
-            </div>
-          </div>
+            :tech="tech"
+            :index="index"
+          />
         </div>
       </div>
     </section>
   </div>
-
-  <!-- 🚨 FALLBACK TECH -->
-  <!-- <div v-else class="min-h-screen tech-bg flex items-center justify-center">
-    <div class="text-center">
-      <div class="glow-box p-8 rounded-xl">
-        <div class="animate-spin w-12 h-12 border-2 border-cyan-400 border-t-transparent rounded-full mx-auto mb-4"></div>
-        <h1 class="font-tech text-2xl font-bold text-white mb-4">
-          {{ locale === 'fr' ? 'Loading System..." : 'Loading System...' }}
-        </h1>
-        <p class="font-mono text-gray-400">
-          {{ locale === 'fr' ? '> Récupération des données...' : '> Fetching data...' }}
-        </p>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <style scoped>

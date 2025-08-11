@@ -20,15 +20,7 @@ const isMobileMenuOpen = ref(false)
 </script>
 
 <template>
-  <nav class="tech-nav">
-    <!-- Background ECG Lines -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-1/2 left-0 w-full h-px">
-        <div class="ecg-line"></div>
-      </div>
-      <div class="absolute top-1/4 left-0 w-2 h-2 bg-cyan-400/30 rounded-full particle-1"></div>
-      <div class="absolute bottom-1/4 right-0 w-1 h-1 bg-purple-400/40 rounded-full particle-2"></div>
-    </div>
+  <nav class="tech-nav-with-border">
 
     <div class="container mx-auto px-4 py-4 relative z-10">
       <div class="flex items-center justify-between">
@@ -95,33 +87,29 @@ const isMobileMenuOpen = ref(false)
         </NuxtLink>
       </div>
     </div>
+
+        <!-- 🌊 BORDER TECH ANIMÉ -->
+    <div class="nav-border-container">
+      <div class="nav-tech-border"></div>
+    </div>
   </nav>
 </template>
 
 <style scoped>
-.tech-nav {
+.tech-nav-with-border {
   position: relative;
   background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+  border-bottom: 2px solid rgba(0, 245, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
+  overflow: visible;
 }
 
-/* === ECG ANIMATION === */
-@keyframes ecg-pulse {
-  0% { 
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { 
-    transform: translateX(100vw);
-    opacity: 0;
-  }
-}
-
-.ecg-line {
+/* === ANIMATED TECH BORDER === */
+.nav-tech-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 200px;
   height: 2px;
   background: linear-gradient(90deg, 
@@ -138,9 +126,30 @@ const isMobileMenuOpen = ref(false)
     #a855f7 85%,
     transparent 100%
   );
-  animation: ecg-pulse 6s ease-in-out infinite;
-  box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  animation: border-pulse 6s ease-in-out infinite;
+  box-shadow: 
+    0 0 10px rgba(0, 245, 255, 0.5),
+    0 2px 20px rgba(0, 245, 255, 0.2);
 }
+
+
+@keyframes border-pulse {
+  0% { 
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    transform: translateX(calc(100vw + 200px));
+    opacity: 0;
+  }
+}
+
 
 /* === PARTICLES === */
 @keyframes particle-float-1 {
