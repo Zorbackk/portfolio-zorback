@@ -94,7 +94,7 @@ const props = defineProps({
   position: relative;
 }
 
-.tech-icon-container::before {
+/* .tech-icon-container::before {
   content: '';
   position: absolute;
   inset: -10px;
@@ -107,13 +107,8 @@ const props = defineProps({
 .tech-card:hover .tech-icon-container::before {
   opacity: 1;
   animation: rotate 3s linear infinite;
-}
+} */
 
-@keyframes rotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .scan-line {
   position: absolute;

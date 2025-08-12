@@ -1,3 +1,14 @@
+/* === Layout background === */
+
+body {
+  @apply bg-transparent;
+}
+
+/* Transition pour le changement de thème */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* === TECH MODERNE IDENTITY === */
 :root {
   --neon-blue: #00f5ff;
