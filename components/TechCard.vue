@@ -33,18 +33,6 @@
     <span class="font-mono text-xs text-cyan-400 uppercase tracking-wider opacity-70 group-hover:opacity-100 transition-opacity">
       {{ tech.category || 'tech' }}
     </span>
-    
-    <!-- Level indicator (nouveau) -->
-    <div class="mt-3 flex justify-center space-x-1">
-      <div 
-        v-for="i in 5"
-        :key="i"
-        class="w-1 h-3 rounded-full transition-all duration-300"
-        :class="i <= (tech.level || 3) 
-          ? 'bg-gradient-to-t from-cyan-400 to-purple-400 shadow-sm shadow-cyan-400' 
-          : 'bg-gray-600'"
-      ></div>
-    </div>
 
     <!-- Badges optionnels -->
     <div v-if="tech.badges" class="flex flex-wrap gap-1 mt-3 justify-center">

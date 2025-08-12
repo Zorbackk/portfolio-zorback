@@ -64,7 +64,7 @@ useSeoMeta({
               <span class="gradient-text pulse-neon">
                 {{ page.hero?.name || 'Alex' }}
               </span>
-              <span class="text-2xl md:text-4xl animate-wave inline-block ml-2">👋</span>
+  
             </h1>
             
             <!-- Ligne de séparation tech -->
@@ -76,31 +76,45 @@ useSeoMeta({
           </div>
 
           <!-- Subtitle Tech -->
-          <h2 class="font-tech text-xl md:text-2xl lg:text-3xl font-semibold text-gray-200 mb-4">
-            <span class="text-purple-400">></span> {{ page.hero?.title || 'Développeur Full-Stack' }}
-          </h2>
+<h2 class="font-tech text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
+  <span class="text-purple-400">></span> {{ page.hero?.title || 'Développeur Full-Stack' }}
+</h2>
 
-          <!-- Description -->
-          <p class="font-mono text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {{ page.hero?.description || 'Passionné par la création d\'expériences web modernes' }}
-          </p>
+<p class="font-mono text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+  {{ page.hero?.description || 'Passionné par la création d\'expériences web modernes' }}
+</p>
 
           <!-- Boutons Tech -->
-          <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
-            <button 
-              v-for="(button, index) in page.hero.buttons"
-              :key="index"
-              class="group glow-box px-8 py-4 rounded-lg font-tech font-semibold text-cyan-400 hover:text-black hover:bg-cyan-400 transition-all duration-300 glitch border border-cyan-400"
-            >
-              <span class="flex items-center justify-center gap-2">
-                {{ button.text }}
-                <UIcon name="i-heroicons-arrow-right" class="group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
-          </div>
+<div class="flex flex-col sm:flex-row gap-6 justify-center mb-12" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
+<UButton 
+  v-for="(button, index) in page.hero.buttons"
+  :key="index"
+  :to="button.to"
+  :variant="button.variant || 'solid'"
+  size="lg"
+  class="group glow-box font-tech 
+        text-gray-700 hover:text-white hover:bg-gray-700 
+         border border-fray-700
+         dark:text-cyan-400 dark:hover:text-black dark:hover:bg-cyan-400 
+         dark:border-cyan-400
+         transition-all duration-300 glitch"
+>
+    <template #leading>
+      <UIcon name="i-heroicons-arrow-right" class="group-hover:translate-x-1 transition-transform" />
+    </template>
+    {{ button.text }}
+  </UButton>
+</div>
 
           <!-- Boutons fallback -->
           <div v-else class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <button class="group glow-box px-8 py-4 rounded-lg font-tech font-semibold text-cyan-400 hover:text-black hover:bg-cyan-400 transition-all duration-300 glitch border border-cyan-400">
+              <span class="flex items-center justify-center gap-2">
+                {{ locale === 'fr' ? 'Me connaître' : 'Know me' }}
+                <span class="text-lg">🚀</span>
+              </span>
+            </button>
+
             <button class="group glow-box px-8 py-4 rounded-lg font-tech font-semibold text-cyan-400 hover:text-black hover:bg-cyan-400 transition-all duration-300 glitch border border-cyan-400">
               <span class="flex items-center justify-center gap-2">
                 {{ locale === 'fr' ? 'Voir mes projets' : 'View my projects' }}
@@ -129,15 +143,15 @@ useSeoMeta({
     </section>
 
     <!-- 🔧 TECHNOLOGIES SECTION AVEC COMPONENT -->
-    <section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
-          <p class="font-mono text-cyan-400 text-sm mb-2">> loading tech_stack...</p>
-          <h2 class="font-tech text-3xl md:text-4xl font-bold text-white mb-4">
-            {{ page.technologies?.title || 'Technologies' }}
-          </h2>
-          <div class="w-24 h-px bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto"></div>
-        </div>
+<section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <p class="font-mono text-cyan-400 dark:text-cyan-300 text-sm mb-2">> loading tech_stack...</p>
+      <h2 class="font-tech text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        {{ page.technologies?.title || 'Technologies' }}
+      </h2>
+      <div class="w-24 h-px bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto"></div>
+    </div>
         
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <TechCard 
