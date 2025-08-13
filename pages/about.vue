@@ -330,13 +330,13 @@ watch(openModal, (newVal) => {
     </div>
     
     <!-- CV agrandi -->
-    <div class="w-full flex justify-center overflow-auto">
-      <img 
-      :src="page?.hero?.cv?.preview" 
-      :alt="page?.hero?.cv?.alt"
-        class="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
-      >
-    </div>
+<div class="w-full flex justify-center overflow-auto">
+  <NuxtImg 
+    :src="page?.hero?.cv?.preview" 
+    :alt="page?.hero?.cv?.alt"
+    class="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
+  />
+</div>
     
     <!-- Instructions -->
     <p class="text-gray-300 text-sm mt-4 text-center">

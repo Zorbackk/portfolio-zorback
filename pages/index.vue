@@ -40,11 +40,11 @@ useSeoMeta({
                 <div class="absolute inset-0 rounded-full border-2 border-cyan-400 animate-pulse"></div>
                 <div class="absolute inset-2 rounded-full border border-purple-400 opacity-60"></div>
                 
-                <img 
-                  :src="page.hero.image" 
-                  :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
-                  class="w-full h-full rounded-full object-cover shadow-2xl relative z-10"
-                >
+<NuxtImg 
+  :src="page.hero.image" 
+  :alt="`Portrait de ${page.hero?.name || 'Alex'}`"
+  class="w-full h-full rounded-full object-cover shadow-2xl relative z-10"
+/>
                 
                 <!-- Coins tech -->
                 <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-cyan-400"></div>
