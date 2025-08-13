@@ -43,29 +43,33 @@ export default defineNuxtConfig({
         file: 'en.json'
       }
     ],
-    defaultLocale: 'fr',
-    strategy: 'no_prefix', 
-    detectBrowserLanguage: {
-      useCookie: false, 
-      redirectOn: 'no prefix' 
-    }
-  },
+  defaultLocale: 'fr',
+  strategy: 'prefix_except_default', 
+  detectBrowserLanguage: {
+    useCookie: true,  
+    redirectOn: 'root'
+  }
+},
 
-  // 🎯 CHANGEMENTS ICI !
-  ssr: true,  // ← Change ça !
+ 
+  ssr: true, 
   
-  nitro: {
-    prerender: {
-      routes: [
-        '/',
-        '/about', 
-        '/contact',
-        '/projects'
-      ]
-    },
-  },
+nitro: {
+  prerender: {
+    routes: [
+      '/',
+      '/about', 
+      '/contact',
+      '/projects',
+      '/en',           
+      '/en/about',     
+      '/en/contact',   
+      '/en/projects'   
+    ],
+    failOnError: false
+  }
+},
 
-  // 🎯 AJOUTE ÇA !
   routeRules: {
     '/': { prerender: true },
     '/about': { prerender: true },
