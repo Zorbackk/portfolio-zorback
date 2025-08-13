@@ -35,16 +35,6 @@ export default defineNuxtConfig({
     '~/plugins/i18n-persistence.client.ts' 
   ],
 
-  // Configuration content
-
-    content: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'fr',
-    // Synchronise avec i18n
-    experimental: {
-      stripQueryParameters: true
-    }
-  },
 
     // Configuration Langues
 
