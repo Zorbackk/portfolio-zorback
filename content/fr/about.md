@@ -96,7 +96,8 @@ values:
       
     - title: "Performance"
       description: "Je privilégie des solutions rapides et optimisées"
-      icon: "i-heroicons-lightning-bolt"
+      icon: "i-heroicons-bolt"
+
 
 hobbies:
   title: "En dehors du code"
