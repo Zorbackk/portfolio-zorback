@@ -6,7 +6,7 @@ hero:
   title: "About Me"
   description: "Full-stack developer passionate about modern technologies"
   cv:
-    preview: "/images/cv-preview.jpg"
+    preview: "/portfolio-zorback/images/cv-preview.jpg"
     pdf: "/cv/cv-alex.pdf"
     alt: "Alex's CV - Full-stack Developer"
 
