@@ -9,20 +9,20 @@
     </div>
     
     <!-- Icône/Logo Tech -->
-    <div class="tech-icon-container mb-4">
-      <!-- Si c'est une image (logo) -->
-      <img 
-        v-if="tech.logo" 
-        :src="tech.logo" 
-        :alt="`Logo ${tech.name}`"
-        class="w-12 h-12 mx-auto filter brightness-75 group-hover:brightness-100 transition-all duration-300"
-      >
-      
-      <!-- Sinon emoji fallback -->
-      <div v-else class="text-4xl group-hover:animate-pulse transition-all duration-300">
-        {{ tech.icon || '🔧' }}
-      </div>
-    </div>
+<div class="tech-icon-container mb-4">
+  <!-- ✅ NuxtImg au lieu de img -->
+  <NuxtImg 
+    v-if="tech.logo" 
+    :src="tech.logo" 
+    :alt="`Logo ${tech.name}`"
+    class="w-12 h-12 mx-auto filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+  />
+  
+  <!-- Sinon emoji fallback -->
+  <div v-else class="text-4xl group-hover:animate-pulse transition-all duration-300">
+    {{ tech.icon || '🔧' }}
+  </div>
+</div>
 
     <!-- Nom Tech -->
     <h3 class="font-tech font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
