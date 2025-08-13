@@ -1,7 +1,6 @@
 export default defineNuxtConfig({
-
   compatibilityDate: '2025-08-05',
-  // Modules installés
+  
   modules: [
     '@nuxt/ui',
     '@nuxt/content', 
@@ -10,8 +9,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
   ],
 
-
-  // SEO et métadonnées
   app: {
     baseURL: '/portfolio-zorback/',
     head: {
@@ -29,28 +26,23 @@ export default defineNuxtConfig({
     }
   },
 
-  // Plugins
-
   plugins: [
     '~/plugins/i18n-persistence.client.ts' 
   ],
 
-
-    // Configuration Langues
-
-i18n: {
-  locales: [
-    { 
-      code: 'fr', 
-      name: 'Français',
-      file: 'fr.json'
-    },
-    { 
-      code: 'en', 
-      name: 'English', 
-      file: 'en.json'
-    }
-  ],
+  i18n: {
+    locales: [
+      { 
+        code: 'fr', 
+        name: 'Français',
+        file: 'fr.json'
+      },
+      { 
+        code: 'en', 
+        name: 'English', 
+        file: 'en.json'
+      }
+    ],
     defaultLocale: 'fr',
     strategy: 'no_prefix', 
     detectBrowserLanguage: {
@@ -59,31 +51,40 @@ i18n: {
     }
   },
 
-    // Mode statique
-  ssr: false,  
-
+  // 🎯 CHANGEMENTS ICI !
+  ssr: true,  // ← Change ça !
+  
   nitro: {
     prerender: {
-      routes: ['/']
-    }
+      routes: [
+        '/',
+        '/about', 
+        '/contact',
+        '/projects'
+      ]
+    },
   },
 
-  // UI et colors
+  // 🎯 AJOUTE ÇA !
+  routeRules: {
+    '/': { prerender: true },
+    '/about': { prerender: true },
+    '/contact': { prerender: true }, 
+    '/projects': { prerender: true }
+  },
 
-    ui: {
+  ui: {
     global: true
   },
 
   colorMode: {
-    preference: 'system', // Suit les préférences système
+    preference: 'system',
     fallback: 'light'
   },
 
-  // Configuration des images
   image: {
     quality: 80,
-    formats: ['webp', 'jpg'], // ← Fallback jpg
-    // 🎯 Ajout responsive
+    formats: ['webp', 'jpg'],
     screens: {
       xs: 320,
       sm: 640,
@@ -93,10 +94,6 @@ i18n: {
     }
   },
 
-    // 🔧 CSS global si besoin
-  // css: ['~/assets/css/main.css'],
-
-  // TypeScript
   typescript: {
     typeCheck: false
   }
