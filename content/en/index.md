@@ -2,7 +2,7 @@
 hero:
   name: "Alexandre"
   title: "Full-Stack Web Developer"
-  description: "Passionate about creating modern and performant web experiences"
+  description: "Work in progress"
   image: "/images/PP.jpg"
   buttons:
     - text: "Know me"
