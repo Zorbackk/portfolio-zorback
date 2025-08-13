@@ -5,7 +5,10 @@ description: "Découvrez mon parcours, mes compétences et ma passion pour le d�
 hero:
   title: "À propos de moi"
   description: "Développeur full-stack passionné par les technologies modernes"
-  image: "/images/profile-large.jpg"
+  cv:
+    preview: "/cv/cv-preview.PNG"
+    pdf: "/cv/cv-alex.pdf"
+    alt: "CV d'Alex - Développeur full-stack"
 
 intro:
   text: "Salut ! Je suis Alex, développeur full-stack avec une passion pour créer des applications web modernes et performantes. Depuis plusieurs années, je transforme des idées en solutions digitales innovantes."

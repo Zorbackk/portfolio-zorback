@@ -1,10 +1,22 @@
 <script setup>
-const { locale, setLocale } = useI18n()
+  /**
+   * Utilisation de l'API de localisation de Nuxt.js pour gérer la langue de l'application.
+   *
+   * @description Définit une propriété `isEnglish` qui permet de switcher entre les langues anglaise et française.
+   */
 
-const isEnglish = computed({
-  get: () => locale.value === 'en',
-  set: (value) => setLocale(value ? 'en' : 'fr')
-})
+  const { locale, setLocale } = useI18n()
+
+  /**
+   * Propriété calculée qui permet de switcher entre les langues anglaise et française.
+   *
+   * @computed
+   * @returns {boolean} - True si la langue est anglaise, false si elle est française.
+   */
+  const isEnglish = computed({
+    get: () => locale.value === 'en',
+    set: (value) => setLocale(value ? 'en' : 'fr')
+  })
 </script>
 
 <template>

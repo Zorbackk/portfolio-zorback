@@ -1,32 +1,39 @@
 ---
 hero:
-  name: "Alex"
-  title: "Développeur Full-Stack"
+  name: "Alexandre"
+  title: "Développeur web Full-Stack"
   description: "Passionné par la création d'expériences web modernes et performantes"
-  image: "/images/profile.jpg"
+  image: "/images/PP.jpg"
   buttons:
-    - text: "Voir mes projets 🚀"
+    - text: "Me connaître"
+      to: "/about"
+      variant: "outline"
+    - text: "Voir mes projets"
       to: "/projects"
-      variant: "solid"
-    - text: "Me contacter 📧"
+      variant: "outline"
+    - text: "Me contacter"
       to: "/contact" 
       variant: "outline"
 
 technologies:
-  title: "Technologies que j'utilise"
+  title: "Les principales technologies que j'utilise"
   items:
-    - name: "Vue.js"
-      icon: "💚"
+    - name: "React"
+      logo: "/images/logos/react.svg"
       category: "frontend"
-    - name: "React" 
-      icon: "⚛️"
+      badges: ["Hooks", "JSX"]
+    - name: "Javascript"
+      logo: "/images/logos/js.svg"
       category: "frontend"
-    - name: "Node.js"
-      icon: "🟢"
+      badges: ["ES6+", "Async", "DOM"]
+    - name: "Java"
+      logo: "/images/logos/java.svg"
       category: "backend"
-    - name: "TypeScript"
-      icon: "🔷"
-      category: "language"
+      badges: ["OOP", "JVM"]
+    - name: "Spring Boot"
+      logo: "/images/logos/spring-boot.svg"
+      category: "backend"
+      badges: ["REST API", "MVC"]
 
 seo:
   title: "Alex - Développeur Full-Stack"

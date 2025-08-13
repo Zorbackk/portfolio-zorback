@@ -3,9 +3,12 @@ title: "About"
 description: "Discover my journey, skills and passion for web development"
 
 hero:
-  title: "About me"
+  title: "About Me"
   description: "Full-stack developer passionate about modern technologies"
-  image: "/images/profile-large.jpg"
+  cv:
+    preview: "/cv/cv-preview.PNG"
+    pdf: "/cv/cv-alex.pdf"
+    alt: "Alex's CV - Full-stack Developer"
 
 intro:
   text: "Hi! I'm Alex, a full-stack developer with a passion for creating modern and performant web applications. For several years, I've been transforming ideas into innovative digital solutions."

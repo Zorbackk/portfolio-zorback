@@ -14,27 +14,27 @@ contact_info:
     link: "mailto:alex@example.com"
     
   - type: "phone" 
-    label: "Phone"
+    label: "Téléphone"
     value: "+33 6 12 34 56 78"
     icon: "i-heroicons-phone"
     link: "tel:+33612345678"
     
   - type: "location"
-    label: "Location"
-    value: "Paris, France"
+    label: "Localisation"
+    value: "Brest, France"
     icon: "i-heroicons-map-pin"
     
   - type: "linkedin"
     label: "LinkedIn"
-    value: "linkedin.com/in/alex-dev"
+    value: "linkedin.com/in/alexandre-wiemann/"
     icon: "i-simple-icons-linkedin"
-    link: "https://linkedin.com/in/alex-dev"
+    link: "https://www.linkedin.com/in/alexandre-wiemann/"
     
   - type: "github"
     label: "GitHub"
-    value: "github.com/alex-dev"
+    value: "github.com/Zorbackk"
     icon: "i-simple-icons-github"
-    link: "https://github.com/alex-dev"
+    link: "https://github.com/Zorbackk"
 
 form:
   title: "Send me a message"
