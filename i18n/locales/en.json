@@ -4,5 +4,8 @@
     "about": "About",
     "projects": "Projects",
     "contact": "Contact"
+  },
+  "footer": {
+    "rights": "All Rights Reserved"
   }
 }

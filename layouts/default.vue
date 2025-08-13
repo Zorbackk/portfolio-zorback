@@ -19,9 +19,7 @@ const backgroundClass = computed(() => {
         <NuxtPage />
       </main>
       
-      <footer class="p-4 text-center text-gray-500 dark:text-gray-400 transition-colors duration-300">
-        © 2025 Zorback - Portfolio
-      </footer>
+      <TheFooter />
     </div>
   </div>
 </template>

@@ -7,6 +7,11 @@ const { data: page, refresh } = await useAsyncData(`about-${locale.value}`, () =
   return queryContent(`/${locale.value}/about`).findOne()
 })
 
+// 🔧 Récupère le contenu des services selon la locale
+const { data: servicesData, refresh: refreshServices } = await useAsyncData(`services-${locale.value}`, () => {
+  return queryContent(`/${locale.value}/services`).findOne()
+})
+
 // 🎯 Recharge quand la langue change
 watch(locale, async () => {
   await refresh()
@@ -238,22 +243,42 @@ watch(openModal, (newVal) => {
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white" v-if="page.cta">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">{{ page.cta.title }}</h2>
-        <p class="text-xl mb-8 opacity-90">{{ page.cta.description }}</p>
-        
-        <UButton 
-          :to="page.cta.button?.to"
-          variant="white"
-          size="xl"
-          icon="i-heroicons-chat-bubble-left-right"
-        >
-          {{ page.cta.button?.text }}
-        </UButton>
+<!-- Section Services + CTA combinée -->
+<section class="py-16">
+  <!-- Services d'abord -->
+  <div v-if="servicesData?.services" class="mb-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+        {{ servicesData.title }}
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <ServiceCard
+          v-for="service in servicesData.services"
+          :key="service.id"
+          :service="service"
+        />
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- CTA en dessous avec fond coloré -->
+  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16" v-if="page.cta">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">{{ page.cta.title }}</h2>
+      <p class="text-xl mb-8 opacity-90">{{ page.cta.description }}</p>
+      
+      <UButton 
+        :to="page.cta.button?.to"
+        variant="white"
+        size="xl"
+        icon="i-heroicons-chat-bubble-left-right"
+      >
+        {{ page.cta.button?.text }}
+      </UButton>
+    </div>
+  </div>
+</section>
   </div>
 
   <!-- Loading fallback -->
