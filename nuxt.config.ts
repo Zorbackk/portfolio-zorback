@@ -13,7 +13,7 @@ export default defineNuxtConfig({
 
   // SEO et métadonnées
   app: {
-    // baseURL: '/portfolio-zorback/',
+    baseURL: '/portfolio-zorback/',
     head: {
       title: 'Alex - Développeur Full-Stack',
       meta: [
