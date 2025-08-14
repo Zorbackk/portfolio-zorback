@@ -30,26 +30,26 @@ export default defineNuxtConfig({
     '~/plugins/i18n-persistence.client.ts' 
   ],
 
-  i18n: {
-    locales: [
-      { 
-        code: 'fr', 
-        name: 'Français',
-        file: 'fr.json'
-      },
-      { 
-        code: 'en', 
-        name: 'English', 
-        file: 'en.json'
-      }
-    ],
-  defaultLocale: 'fr',
-  strategy: 'prefix_except_default', 
-  detectBrowserLanguage: {
-    useCookie: true,  
-    redirectOn: 'root'
-  }
-},
+i18n: {
+  locales: [
+    { 
+      code: 'fr', 
+      name: 'Français',
+      file: 'fr.json'
+    },
+    { 
+      code: 'en', 
+      name: 'English', 
+      file: 'en.json'
+    }
+  ],
+    defaultLocale: 'fr',
+    strategy: 'no_prefix', 
+    detectBrowserLanguage: {
+      useCookie: false, 
+      redirectOn: 'no prefix' 
+    }
+  },
 
  
   ssr: true, 

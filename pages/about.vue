@@ -270,7 +270,7 @@ watch(openModal, (newVal) => {
       
       <UButton 
         :to="page.cta.button?.to"
-        variant="white"
+        variant="solid"
         size="xl"
         icon="i-heroicons-chat-bubble-left-right"
       >
@@ -312,7 +312,7 @@ watch(openModal, (newVal) => {
         <UButton 
           :to="page?.hero?.cv?.pdf"
           target="_blank"
-          variant="white"
+          variant="solid"
           size="sm"
           icon="i-heroicons-arrow-down-tray"
         >
