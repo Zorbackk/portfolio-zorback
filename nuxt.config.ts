@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   ],
 
   app: {
-    baseURL: '/portfolio-zorback/',
     head: {
       title: 'Alex - Développeur Full-Stack',
       meta: [
@@ -53,29 +52,6 @@ i18n: {
 
  
   ssr: true, 
-  
-nitro: {
-  prerender: {
-    routes: [
-      '/',
-      '/about', 
-      '/contact',
-      '/projects',
-      '/en',           
-      '/en/about',     
-      '/en/contact',   
-      '/en/projects'   
-    ],
-    failOnError: false
-  }
-},
-
-  routeRules: {
-    '/': { prerender: true },
-    '/about': { prerender: true },
-    '/contact': { prerender: true }, 
-    '/projects': { prerender: true }
-  },
 
   ui: {
     global: true
