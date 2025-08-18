@@ -58,7 +58,7 @@ i18n: {
   },
 
   colorMode: {
-    preference: 'system',
+    preference: 'light',
     fallback: 'light'
   },
 
