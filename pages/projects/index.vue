@@ -113,7 +113,7 @@ useSeoMeta({
                   icon="i-heroicons-arrow-top-right-on-square"
                   class="flex-1"
                 >
-                  {{ locale === 'fr' ? 'Demo' : 'Demo' }}
+                  {{ locale === 'fr' ? 'Vous y êtes' : 'Already there' }}
                 </UButton>
               </div>
             </div>

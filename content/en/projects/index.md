@@ -11,8 +11,8 @@ projects:
     description: "Portfolio developed with Nuxt 3 and Vue.js"
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
     image: "/images/projects/portfolio.jpg"
-    github: "https://github.com/user/portfolio"
-    live: "https://mywebsite.com"
+    github: "https://github.com/Zorbackk/portfolio-zorback"
+    live: "https://portfolio-zorback.vercel.app/"
     status: "completed"
     
   - title: "E-commerce Application"
