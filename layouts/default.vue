@@ -11,6 +11,7 @@ const backgroundClass = computed(() => {
 <template>
   <div class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
     <div>
+      
       <!-- 🎯 Navigation avec transition -->
       <TheNavigation />
 

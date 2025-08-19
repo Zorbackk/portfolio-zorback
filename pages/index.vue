@@ -55,9 +55,6 @@ useSeoMeta({
 
           <!-- Titre avec effet tech -->
           <div class="mb-8">
-            <p class="font-mono text-cyan-400 text-sm mb-2 tracking-wider">
-              > {{ locale === 'fr' ? 'Initialisation du portfolio...' : 'Portfolio initialization...' }}
-            </p>
             
             <h1 class="font-tech text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
               {{ locale === 'fr' ? 'Salut, c\'est' : 'Hi, I\'m' }} 
@@ -130,23 +127,14 @@ useSeoMeta({
             </button>
           </div>
 
-          <!-- Status Bar Tech -->
-          <div class="flex justify-center">
-            <div class="glow-box px-6 py-3 rounded-full font-mono text-sm">
-              <span class="text-green-400">●</span>
-              <span class="text-gray-300 ml-2">{{ locale === 'fr' ? 'Disponible pour de nouveaux projets' : 'Available for new projects' }}</span>
-            </div>
-          </div>
         </div>
       </div>
-
     </section>
 
     <!-- 🔧 TECHNOLOGIES SECTION AVEC COMPONENT -->
 <section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <p class="font-mono text-cyan-400 dark:text-cyan-300 text-sm mb-2">> loading tech_stack...</p>
       <h2 class="font-tech text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
         {{ page.technologies?.title || 'Technologies' }}
       </h2>
