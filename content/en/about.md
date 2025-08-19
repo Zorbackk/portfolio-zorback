@@ -104,23 +104,23 @@ hobbies:
   items:
     - name: "Gaming"
       icon: "i-heroicons-puzzle-piece"
-      description: "Video game enthusiast, especially RPGs"
+      description: "Video game enthusiast"
       
+    - name: "Cinéma"
+      icon: "i-heroicons-globe-alt"
+      description: "Movie buff"
+
     - name: "Sport"
       icon: "i-heroicons-heart"
-      description: "Running and weight training to keep balance"
+      description: "Tennis lover"
       
-    - name: "Reading"
+    - name: "Lecture"
       icon: "i-heroicons-book-open"
-      description: "Tech, science-fiction and personal development"
-      
-    - name: "Travel"
-      icon: "i-heroicons-globe-alt"
-      description: "Discovering new cultures and perspectives"
+      description: "Science fiction addict"
 
 cta:
   title: "Let's work together!"
-  description: "Have a project in mind? Let's discuss it over coffee ☕"
+  description: "Have a project in mind? Get in touch"
   button:
     text: "Contact me"
     to: "/contact"

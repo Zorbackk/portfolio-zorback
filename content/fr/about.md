@@ -104,23 +104,23 @@ hobbies:
   items:
     - name: "Gaming"
       icon: "i-heroicons-puzzle-piece"
-      description: "Passionné de jeux vidéo, surtout les RPG"
+      description: "Passionné de jeux vidéo"
       
+    - name: "Cinéma"
+      icon: "i-heroicons-globe-alt"
+      description: "Adepte des salles obscures"
+
     - name: "Sport"
       icon: "i-heroicons-heart"
-      description: "Course à pied et musculation pour garder l'équilibre"
+      description: "Féru de tennis"
       
     - name: "Lecture"
       icon: "i-heroicons-book-open"
-      description: "Tech, science-fiction et développement personnel"
-      
-    - name: "Voyage"
-      icon: "i-heroicons-globe-alt"
-      description: "Découvrir de nouvelles cultures et perspectives"
+      description: "Inconditionnel de science-fiction"
 
 cta:
   title: "Travaillons ensemble !"
-  description: "Vous avez un projet en tête ? Discutons-en autour d'un café ☕"
+  description: "Vous avez un projet en tête ? Venez me contacter"
   button:
     text: "Me contacter"
     to: "/contact"
