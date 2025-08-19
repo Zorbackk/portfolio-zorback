@@ -330,18 +330,18 @@ useSeoMeta({
                 variant="ghost"
                 size="sm"
                 icon="i-heroicons-arrow-top-right-on-square"
-                class="ml-2"
+                class="ml-2 text-blue-600 dark:text-green-400"
               />
             </div>
           </div>
           
           <!-- Disponibilité -->
-          <div class="mt-8 p-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+          <div class="mt-8 p-6 bg-blue-500/20 dark:bg-green-900/20 border border-blue-600 dark:border-green-800 rounded-lg">
             <div class="flex items-center">
-              <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span class="font-semibold text-green-800 dark:text-green-300">{{ page.texts?.available }}</span>
+              <div class="w-3 h-3 bg-green-600 dark:bg-green-500 rounded-full mr-3"></div>
+              <span class="font-semibold text-dark dark:text-green-300">{{ page.texts?.available }}</span>
             </div>
-            <p class="text-green-700 dark:text-green-400 mt-2">
+            <p class="text-dark dark:text-green-400 mt-2">
               {{ page.texts?.availableDesc }}
             </p>
           </div>
@@ -368,7 +368,7 @@ useSeoMeta({
                 :placeholder="page.texts?.fullNamePlaceholder"
                 size="lg"
                 maxlength="50"
-                :color="errors.name ? 'red' : 'primary'"
+                :color="errors.name ? 'red' : 'blue'"
               />
             </UFormGroup>
 
@@ -384,7 +384,7 @@ useSeoMeta({
                 :placeholder="page.texts?.emailPlaceholder"
                 size="lg"
                 autocomplete="email"
-                :color="errors.email ? 'red' : 'primary'"
+                :color="errors.email ? 'red' : 'blue'"
               />
             </UFormGroup>
 
@@ -399,7 +399,7 @@ useSeoMeta({
                 :options="page.options?.subjects"
                 :placeholder="page.texts?.subjectPlaceholder"
                 size="lg"
-                :color="errors.subject ? 'red' : 'primary'"
+                :color="errors.subject ? 'red' : 'blue'"
               />
             </UFormGroup>
 
@@ -424,19 +424,19 @@ useSeoMeta({
                 :rows="6"
                 size="lg"
                 maxlength="1000"
-                :color="errors.message ? 'red' : 'primary'"
+                :color="errors.message ? 'red' : 'blue'"
               />
               <div class="text-right text-sm text-gray-500 mt-1">
                 {{ form.message.length }}/1000
               </div>
             </UFormGroup>
 
-            <UButton 
+            <UButton
+              class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-green-600 dark:hover:bg-green-700 text-white"
               type="submit" 
               :loading="isSubmitting"
               :disabled="isSubmitting"
               size="lg" 
-              class="w-full"
               icon="i-heroicons-paper-airplane"
             >
               {{ isSubmitting ? page.texts?.sending : page.texts?.sendMessage }}
@@ -447,3 +447,12 @@ useSeoMeta({
     </div>
   </div>
 </template>
+
+
+<style scoped>
+:deep(input),
+:deep(textarea),
+:deep(select) {
+  @apply bg-blue-500/20 dark:bg-green-900/20 border border-gray-200 dark:border-green-800;
+}
+</style>

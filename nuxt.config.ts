@@ -58,8 +58,8 @@ i18n: {
   },
 
   colorMode: {
-    preference: 'light',
-    fallback: 'light'
+    preference: 'dark',
+    fallback: 'dark'
   },
 
   image: {

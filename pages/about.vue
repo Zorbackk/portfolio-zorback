@@ -109,22 +109,22 @@ watch(openModal, (newVal) => {
     
     <!-- Bouton téléchargement CV -->
     <div class="text-center mt-12" v-if="page.hero?.cv">
-      <UButton 
-        :to="page.hero.cv.pdf"
-        target="_blank"
-        variant="outline"
-        size="lg"
-        icon="i-heroicons-arrow-down-tray"
-        class="group"
-      >
-        {{ locale === 'fr' ? 'Télécharger mon CV' : 'Download my CV' }}
-      </UButton>
+<UButton 
+  :to="page.hero.cv.pdf"
+  target="_blank"
+  variant="solid"
+  size="lg"
+  icon="i-heroicons-arrow-down-tray"
+  class="group bg-blue-600 hover:bg-blue-700 dark:bg-green-600 dark:hover:bg-green-700 text-white"
+>
+  {{ locale === 'fr' ? 'Télécharger mon CV' : 'Download my CV' }}
+</UButton>
     </div>
   </div>
 </section>
 
     <!-- Parcours -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-800" v-if="page.journey?.items">
+    <section class="py-16" v-if="page.journey?.items">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
           {{ page.journey.title }}
@@ -200,7 +200,7 @@ watch(openModal, (newVal) => {
     </section>
 
     <!-- Valeurs -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-800" v-if="page.values?.items">
+    <section class="py-16" v-if="page.values?.items">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
           {{ page.values.title }}
@@ -263,7 +263,7 @@ watch(openModal, (newVal) => {
   </div>
 
   <!-- CTA en dessous avec fond coloré -->
-  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16" v-if="page.cta">
+  <div class=" bg-gray-800 dark:bg-gray-800 text-white py-16" v-if="page.cta">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">{{ page.cta.title }}</h2>
       <p class="text-xl mb-8 opacity-90">{{ page.cta.description }}</p>
