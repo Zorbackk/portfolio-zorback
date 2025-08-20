@@ -7,6 +7,13 @@ const toggleDark = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
+onMounted(() => {
+  nextTick(() => {
+    toggleDark()
+    setTimeout(() => toggleDark(), 0)
+  })
+})
+
 // Navigation items
 const navLinks = [
   { path: '/', label: 'nav.home' },
