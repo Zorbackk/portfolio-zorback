@@ -15,16 +15,20 @@ projects:
     live: "https://portfolio-zorback.vercel.app/"
     status: "completed"
     
-  - title: "Application Fullstack complète pour un club de tennis"
-    description: "API REST permettant la gestion d'articles, la saisie de résultat et la création de galeries photos"
+  - title: "Application Fullstack complète "
+    description: "API REST permettant la gestion d'articles, la saisie de résultat et la création de galeries photos pour un club de tennis"
     technologies: ["React", "JAVA 21", "Spring Boot"]
-    image: "/images/projects/ecommerce.jpg"
+    image: "/images/projects/tcpl.png"
     github: "https://github.com/user/ecommerce"
     status: "in-progress"
+    pdf:
+      title: "Documentation technique"
+      file: "/tcpl/app-presentation.pdf"
     
   - title: "Site vitrine"
     description: "SPA pour le bar 'La cabane de Nonna' "
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
+    image: "/images/projects/lcdn.jpg"
     github: "https://github.com/user/api"
     status: "completed"
 ---

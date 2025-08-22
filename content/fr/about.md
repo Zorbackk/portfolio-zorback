@@ -11,26 +11,26 @@ hero:
     alt: "CV d'Alex - Développeur full-stack"
 
 intro:
-  text: "Salut ! Je suis Alex, développeur full-stack avec une passion pour créer des applications web modernes et performantes. Depuis plusieurs années, je transforme des idées en solutions digitales innovantes."
+  text: "À la suite d'une reconversion professionnelle en septembre 2024, et après l'obtention de la certification Développeur Web et Web mobile obtenue à l'AFPA de Brest, je suis entièrement disposé à vous proposer mes services pour toutes vos envies de site ou d'application web. Mes expériences passées me permettent de travailler avec rigueur et attention, la passion de ma reconversion me permet d'être au plus proche de vos demandes"
 
 journey:
   title: "Mon parcours"
   items:
-    - year: "2024"
+    - year: "Septembre 2025"
       title: "Freelance Développeur Full-Stack"
-      description: "Spécialisé en Vue.js, Nuxt et Spring Boot"
+      description: "Début de mon aventure en tant que freelance"
       icon: "i-heroicons-rocket-launch"
       
-    - year: "2022-2023"
-      title: "Développeur Front-End"
-      company: "TechCorp"
-      description: "Développement d'interfaces modernes avec React et Vue.js"
+    - year: "2024-2025"
+      title: "Développeur en formation"
+      company: "AFPA de Brest, Wise Panda Inc."
+      description: "Formation Développeur Web et Web Mobile"
       icon: "i-heroicons-computer-desktop"
       
-    - year: "2020-2022"
-      title: "Développeur Junior"
-      company: "StartupXYZ"
-      description: "Mes premiers pas dans le développement web professionnel"
+    - year: "2016-2023"
+      title: "Responsable de service"
+      company: "Mairie de Landudal, Mairie de Landivisiau"
+      description: "Durant 8 ans j'ai exercé en tant que secrétaire de mairie puis responsable de service au sein de différentes collectivités territoriales"
       icon: "i-heroicons-academic-cap"
 
 skills:
@@ -41,43 +41,45 @@ skills:
       color: "blue"
       items:
         - name: "Vue.js / Nuxt"
-          level: 90
+          level: 75
         - name: "React / Next.js"
           level: 80
         - name: "TypeScript"
           level: 85
-        - name: "Tailwind CSS"
-          level: 95
+        - name: "Mantine UI"
+          level: 80
         - name: "HTML/CSS"
-          level: 95
+          level: 85
           
     - name: "Backend"
       icon: "i-heroicons-server"
       color: "green"
       items:
         - name: "Java / Spring Boot"
-          level: 85
+          level: 90
         - name: "Node.js"
           level: 80
-        - name: "Python"
-          level: 70
-        - name: "PostgreSQL"
+        - name: "Conceptualisation / Modélisation"
           level: 85
-        - name: "MongoDB"
+        - name: "MySQL"
+          level: 85
+        - name: "MariaDB"
           level: 75
           
-    - name: "DevOps & Outils"
+    - name: "Outils"
       icon: "i-heroicons-cog-6-tooth"
       color: "purple"
       items:
         - name: "Docker"
-          level: 80
+          level: 60
         - name: "Git"
           level: 90
         - name: "CI/CD"
           level: 75
-        - name: "AWS"
+        - name: "OVH"
           level: 70
+        - name: "Laragon"
+          level: 80
 
 values:
   title: "Mes valeurs"
