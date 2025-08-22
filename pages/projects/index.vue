@@ -1,10 +1,37 @@
 <script setup lang="ts">
+// 🔧 Interfaces TypeScript
+interface ProjectPdf {
+  title: string;
+  file: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  image?: string;
+  status: 'completed' | 'in-progress';
+  technologies: string[];
+  github?: string;
+  live?: string;
+  pdf?: ProjectPdf; // ← Optionnel
+}
+
+interface PageData {
+  title: string;
+  description?: string;
+  hero?: {
+    title: string;
+    description: string;
+  };
+  projects?: Project[];
+}
+
 const { locale } = useI18n()
 
 // 🔧 Récupère le contenu selon la locale
 const { data: page, refresh } = await useAsyncData(`projects-${locale.value}`, () => {
   return queryContent(`/${locale.value}/projects`).findOne()
-})
+}) as { data: Ref<PageData>, refresh: () => Promise<void> }
 
 // 🎯 Recharge quand la langue change
 watch(locale, async () => {
@@ -37,12 +64,12 @@ useSeoMeta({
     </section>
 
     <!-- Projects Grid -->
-    <section class="py-16" v-if="page.projects">
+    <section class="py-16" v-if="page.projects && page.projects.length > 0">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div 
-            v-for="project in page.projects" 
-            :key="project.title"
+            v-for="(project, index) in (page.projects as Project[])" 
+            :key="`project-${index}-${project.title}`"
             class="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-shadow"
           >
             <!-- Image -->
@@ -56,11 +83,11 @@ useSeoMeta({
                 height="200"
               />
               <UIcon v-else name="i-heroicons-photo" class="text-4xl text-gray-400" />
-              
+
               <!-- Overlay on hover -->
               <div class="absolute inset-0 bg-blue-600 opacity-0 hover:opacity-20 transition-opacity"></div>
             </div>
-            
+
             <!-- Content -->
             <div class="p-6">
               <div class="flex items-center justify-between mb-2">
@@ -75,14 +102,14 @@ useSeoMeta({
                   }}
                 </UBadge>
               </div>
-              
+
               <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{{ project.description }}</p>
-              
+
               <!-- Technologies -->
               <div class="flex flex-wrap gap-2 mb-4">
                 <UBadge 
-                  v-for="tech in project.technologies" 
-                  :key="tech"
+                  v-for="(tech, techIndex) in project.technologies" 
+                  :key="`tech-${techIndex}-${tech}`"
                   variant="soft"
                   size="xs"
                   color="blue"
@@ -90,31 +117,48 @@ useSeoMeta({
                   {{ tech }}
                 </UBadge>
               </div>
-              
+
               <!-- Links -->
-              <div class="flex gap-3">
-                <UButton 
-                  v-if="project.github"
-                  :to="project.github"
-                  target="_blank"
-                  variant="outline"
-                  size="sm"
-                  icon="i-simple-icons-github"
-                  class="flex-1"
-                >
-                  {{ locale === 'fr' ? 'Code' : 'Code' }}
-                </UButton>
-                
-                <UButton 
-                  v-if="project.live"
-                  :to="project.live"
-                  target="_blank"
-                  size="sm"
-                  icon="i-heroicons-arrow-top-right-on-square"
-                  class="flex-1"
-                >
-                  {{ locale === 'fr' ? 'Vous y êtes' : 'Already there' }}
-                </UButton>
+              <div class="flex flex-col gap-3">
+                <!-- Première ligne : GitHub + Live -->
+                <div class="flex gap-3">
+                  <UButton 
+                    v-if="project.github"
+                    :to="project.github"
+                    target="_blank"
+                    variant="outline"
+                    size="sm"
+                    icon="i-simple-icons-github"
+                    class="flex-1"
+                  >
+                    {{ locale === 'fr' ? 'Code' : 'Code' }}
+                  </UButton>
+
+                  <UButton 
+                    v-if="project.live"
+                    :to="project.live"
+                    target="_blank"
+                    size="sm"
+                    icon="i-heroicons-arrow-top-right-on-square"
+                    class="flex-1"
+                  >
+                    {{ locale === 'fr' ? 'Voir le site' : 'View Live' }}
+                  </UButton>
+                </div>
+
+                <!-- 🎯 Deuxième ligne : PDF (téléchargement uniquement) -->
+                <div v-if="project.pdf">
+                  <UButton 
+                    :to="project.pdf.file"
+                    target="_blank"
+                    size="sm"
+                    icon="i-heroicons-arrow-down-tray"
+                    class="w-full"
+                    color="green"
+                  >
+                   {{ locale === 'fr' ? 'Télécharger' : 'Download' }} {{ project.pdf.title }}
+                  </UButton>
+                </div>
               </div>
             </div>
           </div>

@@ -27,7 +27,7 @@ services:
       - "Modular microservices architecture"
       - "Relational databases"
       - "JWT and OAuth2 authentication"
-      - "Automated testing and documentation"
+      - "Documentation"
       - "Third-party services integration"
     buttonText: "View my backend projects"
     buttonColor: "bg-amber-500"
