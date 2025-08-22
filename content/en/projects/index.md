@@ -15,16 +15,16 @@ projects:
     live: "https://portfolio-zorback.vercel.app/"
     status: "completed"
     
-  - title: "E-commerce Application"
-    description: "Online store with cart and payment system"
-    technologies: ["React", "Node.js", "MongoDB"]
+  - title: "Fullstack application for a tennis club"
+    description: "REST API for article management, result entry, and photo gallery creation"
+    technologies: ["React", "JAVA 21", "Spring Boot"]
     image: "/images/projects/ecommerce.jpg"
     github: "https://github.com/user/ecommerce"
     status: "in-progress"
     
-  - title: "REST API"
-    description: "Robust API for user management"
-    technologies: ["Spring Boot", "PostgreSQL", "Docker"]
+  - title: "showcase website"
+    description: "SPA for 'La cabane de Nonna' "
+    technologies: ["Vue.js", "Nuxt", "TypeScript"]
     github: "https://github.com/user/api"
     status: "completed"
 ---
