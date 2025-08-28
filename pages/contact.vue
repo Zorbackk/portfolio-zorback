@@ -201,34 +201,47 @@ const pending = ref(false)
 
 // 📤 Soumission du formulaire
 const handleSubmit = async () => {
+
+  if (!validateForm()) {
+    return 
+  }
+
   pending.value = true
   error.value = ''
+  success.value = false 
 
   try {
-    // 🎯 Appel à ton API
+    
+    const sanitizedData = {
+      name: sanitizeInput(form.name),
+      email: sanitizeInput(form.email),
+      subject: sanitizeInput(form.subject),
+      budget: form.budget, 
+      message: sanitizeInput(form.message)
+    }
+
     const response = await $fetch('/api/contact', {
       method: 'POST',
-      body: {
-        name: form.name,
-        email: form.email,
-        subject: form.subject,
-        budget: form.budget,
-        message: form.message
-      }
+      body: sanitizedData
     })
 
     if (response.success) {
-      // ✅ Succès
+  
       success.value = true
-      form.name = ''
-      form.email = ''
-      form.subject = ''
-      form.budget = ''
-      form.message = ''
+      errors.value = {} 
+      
+      // Reset du formulaire
+      Object.assign(form, {
+        name: '',
+        email: '',
+        subject: '',
+        budget: '',
+        message: ''
+      })
     }
 
   } catch (err: any) {
-    // ❌ Erreur
+    console.error('Erreur envoi:', err)
     error.value = err.data?.message || 'Une erreur est survenue'
   } finally {
     pending.value = false
