@@ -194,54 +194,44 @@ const sanitizeInput = (input: string): string => {
     .trim() // Supprime espaces début/fin
 }
 
+// Constantes pour envoie du formulaire
+const success = ref(false)
+const error = ref('')
+const pending = ref(false)
+
 // 📤 Soumission du formulaire
 const handleSubmit = async () => {
-  // Validation avant envoi
-  if (!validateForm()) {
-    return
-  }
-
-  isSubmitting.value = true
+  pending.value = true
+  error.value = ''
 
   try {
-    // Sanitisation des données
-    const sanitizedData = {
-      name: sanitizeInput(form.name),
-      email: sanitizeInput(form.email).toLowerCase(),
-      subject: form.subject, // Select, déjà sûr
-      budget: form.budget,   // Select, déjà sûr  
-      message: sanitizeInput(form.message)
+    // 🎯 Appel à ton API
+    const response = await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        budget: form.budget,
+        message: form.message
+      }
+    })
+
+    if (response.success) {
+      // ✅ Succès
+      success.value = true
+      form.name = ''
+      form.email = ''
+      form.subject = ''
+      form.budget = ''
+      form.message = ''
     }
 
-    console.log('Données à envoyer:', sanitizedData)
-
-    // TODO: Remplacer par votre API
-    // const response = await $fetch('/api/contact', {
-    //   method: 'POST',
-    //   body: sanitizedData
-    // })
-
-    // Simulation d'envoi
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Réinitialiser le formulaire
-    Object.assign(form, {
-      name: '',
-      email: '',
-      subject: '',
-      budget: '',
-      message: ''
-    })
-    
-    // Reset erreurs
-    errors.value = {}
-    
-    console.log('Message envoyé avec succès!')
-
-  } catch (error) {
-    console.error('Erreur envoi formulaire:', error)
+  } catch (err: any) {
+    // ❌ Erreur
+    error.value = err.data?.message || 'Une erreur est survenue'
   } finally {
-    isSubmitting.value = false
+    pending.value = false
   }
 }
 
@@ -442,6 +432,22 @@ useSeoMeta({
               {{ isSubmitting ? page.texts?.sending : page.texts?.sendMessage }}
             </UButton>
           </UForm>
+            <!-- ✅ Succès -->
+  <UAlert 
+    v-if="success" 
+    color="green" 
+    variant="subtle" 
+    title="Message envoyé !" 
+    description="Je reviendrai vers vous rapidement."
+  />
+  
+  <!-- ❌ Erreur -->
+  <UAlert 
+    v-if="error" 
+    color="red" 
+    variant="subtle" 
+    :title="error"
+  />
         </div>
       </div>
     </div>
