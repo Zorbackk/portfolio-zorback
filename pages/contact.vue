@@ -189,59 +189,62 @@ const validateForm = (): boolean => {
 // 🧹 Sanitisation des données
 const sanitizeInput = (input: string): string => {
   return input
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Supprime scripts
-    .replace(/<[^>]*>/g, '') // Supprime HTML
-    .trim() // Supprime espaces début/fin
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') 
+    .replace(/<[^>]*>/g, '') 
+    .trim() 
 }
+
+// Constantes pour envoie du formulaire
+const success = ref(false)
+const error = ref('')
+const pending = ref(false)
 
 // 📤 Soumission du formulaire
 const handleSubmit = async () => {
-  // Validation avant envoi
+
   if (!validateForm()) {
-    return
+    return 
   }
 
-  isSubmitting.value = true
+  pending.value = true
+  error.value = ''
+  success.value = false 
 
   try {
-    // Sanitisation des données
+    
     const sanitizedData = {
       name: sanitizeInput(form.name),
-      email: sanitizeInput(form.email).toLowerCase(),
-      subject: form.subject, // Select, déjà sûr
-      budget: form.budget,   // Select, déjà sûr  
+      email: sanitizeInput(form.email),
+      subject: sanitizeInput(form.subject),
+      budget: form.budget, 
       message: sanitizeInput(form.message)
     }
 
-    console.log('Données à envoyer:', sanitizedData)
-
-    // TODO: Remplacer par votre API
-    // const response = await $fetch('/api/contact', {
-    //   method: 'POST',
-    //   body: sanitizedData
-    // })
-
-    // Simulation d'envoi
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Réinitialiser le formulaire
-    Object.assign(form, {
-      name: '',
-      email: '',
-      subject: '',
-      budget: '',
-      message: ''
+    const response = await $fetch('/api/contact', {
+      method: 'POST',
+      body: sanitizedData
     })
-    
-    // Reset erreurs
-    errors.value = {}
-    
-    console.log('Message envoyé avec succès!')
 
-  } catch (error) {
-    console.error('Erreur envoi formulaire:', error)
+    if (response.success) {
+  
+      success.value = true
+      errors.value = {} 
+      
+      // Reset du formulaire
+      Object.assign(form, {
+        name: '',
+        email: '',
+        subject: '',
+        budget: '',
+        message: ''
+      })
+    }
+
+  } catch (err: any) {
+    console.error('Erreur envoi:', err)
+    error.value = err.data?.message || 'Une erreur est survenue'
   } finally {
-    isSubmitting.value = false
+    pending.value = false
   }
 }
 
@@ -442,6 +445,22 @@ useSeoMeta({
               {{ isSubmitting ? page.texts?.sending : page.texts?.sendMessage }}
             </UButton>
           </UForm>
+            <!-- ✅ Succès -->
+  <UAlert 
+    v-if="success" 
+    color="green" 
+    variant="subtle" 
+    title="Message envoyé !" 
+    description="Je reviendrai vers vous rapidement."
+  />
+  
+  <!-- ❌ Erreur -->
+  <UAlert 
+    v-if="error" 
+    color="red" 
+    variant="subtle" 
+    :title="error"
+  />
         </div>
       </div>
     </div>

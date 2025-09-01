@@ -31,4 +31,5 @@ projects:
     image: "/images/projects/lcdn.jpg"
     github: "https://github.com/user/api"
     status: "completed"
+
 ---
