@@ -16,9 +16,9 @@ export default defineEventHandler(async (event) => {
 
     // 📧 Envoi de l'email
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', 
+      from: 'contact@nevezio.com', 
       // une fois le serveur mis en production, changer l'adresse de retour : nevezio.com
-      to: ['alexandre.wiemann@gmail.com'],
+      to: ['nevezio.contact@gmail.com'],
       subject: `[Portfolio] ${body.subject || 'Nouveau contact'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px;">

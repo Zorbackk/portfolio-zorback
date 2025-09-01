@@ -189,9 +189,9 @@ const validateForm = (): boolean => {
 // 🧹 Sanitisation des données
 const sanitizeInput = (input: string): string => {
   return input
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Supprime scripts
-    .replace(/<[^>]*>/g, '') // Supprime HTML
-    .trim() // Supprime espaces début/fin
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') 
+    .replace(/<[^>]*>/g, '') 
+    .trim() 
 }
 
 // Constantes pour envoie du formulaire

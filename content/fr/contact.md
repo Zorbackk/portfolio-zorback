@@ -9,7 +9,7 @@ hero:
 contact_info:
   - type: "email"
     label: "Email"
-    value: "alex@example.com"
+    value: "contact@nevezio.com"
     icon: "i-heroicons-envelope"
     link: "mailto:alex@example.com"
     
