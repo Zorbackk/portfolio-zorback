@@ -13,12 +13,6 @@ contact_info:
     icon: "i-heroicons-envelope"
     link: "mailto:alex@example.com"
     
-  - type: "phone" 
-    label: "Téléphone"
-    value: "+33 6 12 34 56 78"
-    icon: "i-heroicons-phone"
-    link: "tel:+33612345678"
-    
   - type: "location"
     label: "Localisation"
     value: "Brest, France"

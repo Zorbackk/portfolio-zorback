@@ -2,7 +2,7 @@
 hero:
   name: "Alexandre"
   title: "Développeur web Full-Stack"
-  description: "Portfolio en cours de construction"
+  description: "Découvrez mon portfolio"
   image: "/images/PP.jpg"
   buttons:
     - text: "Me connaître"

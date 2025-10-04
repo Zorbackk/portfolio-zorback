@@ -28,19 +28,29 @@ const isMobileMenuOpen = ref(false)
 
 <template>
   <nav class="tech-nav-with-border">
-
     <div class="container mx-auto px-4 py-4 relative z-10">
       <div class="flex items-center justify-between">
-        
-        <!-- Logo/Brand -->
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 border-2 border-cyan-400 rounded-lg flex items-center justify-center">
-            <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-          </div>
-          <span class="font-bold text-xl gradient-text font-mono">
-            ALEX.DEV
-          </span>
-        </div>
+
+        <!-- Logo/Brand avec lien vers home -->
+          <NuxtLink 
+            to="/" 
+            class="flex items-center gap-3 group transition-all duration-300 hover:scale-105"
+            @click="isMobileMenuOpen = false"
+          >
+            <!-- Wrapper du logo avec effet hover -->
+            <div class="logo-wrapper">
+              <NuxtImg 
+                src="/images/logo.webp"
+                alt="Nevezio logo"
+                width="832"
+                height="150"
+                format="webp"
+                class="logo-image"
+                loading="eager"
+                preload
+              />
+            </div>
+          </NuxtLink>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex gap-4">
@@ -56,7 +66,7 @@ const isMobileMenuOpen = ref(false)
 
         <!-- Controls (Dark Mode + Language) -->
         <div class="flex items-center gap-3">
-          <!-- Dark mode toggle - Ton UButton existant avec style tech -->
+          <!-- Dark mode toggle -->
           <UButton
             :icon="isDark ? 'i-heroicons-sun' : 'i-heroicons-moon'"
             size="sm"
@@ -65,8 +75,8 @@ const isMobileMenuOpen = ref(false)
             class="tech-button text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 border border-transparent"
             @click="toggleDark"
           />
-          
-          <!-- Ton LanguageSwitcher existant -->
+
+          <!-- Language Switcher -->
           <div class="tech-language-wrapper">
             <LanguageSwitcher />
           </div>
@@ -95,7 +105,7 @@ const isMobileMenuOpen = ref(false)
       </div>
     </div>
 
-        <!-- 🌊 BORDER TECH ANIMÉ -->
+    <!-- 🌊 BORDER TECH ANIMÉ -->
     <div class="nav-border-container">
       <div class="nav-tech-border"></div>
     </div>
@@ -110,6 +120,46 @@ const isMobileMenuOpen = ref(false)
   border-bottom: 2px solid rgba(0, 245, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
   overflow: visible;
+}
+
+/* === LOGO WRAPPER pour format horizontal 832x150 === */
+.logo-wrapper {
+  position: relative;
+  width: 166px;  
+  height: 30px;  
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.group:hover .logo-image {
+  transform: scale(1.01);  
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))  
+          drop-shadow(0 0 15px rgba(0, 245, 255, 0.2)); 
+}
+
+@keyframes border-glow {
+  0%, 100% { 
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+}
+
+/* 📱 Responsive - Logo plus petit sur mobile */
+@media (max-width: 768px) {
+  .logo-wrapper {
+    width: 120px;  /* Logo plus petit sur mobile */
+    height: 22px;
+  }
 }
 
 /* === ANIMATED TECH BORDER === */
@@ -139,7 +189,6 @@ const isMobileMenuOpen = ref(false)
     0 2px 20px rgba(0, 245, 255, 0.2);
 }
 
-
 @keyframes border-pulse {
   0% { 
     transform: translateX(-200px);
@@ -156,21 +205,6 @@ const isMobileMenuOpen = ref(false)
     opacity: 0;
   }
 }
-
-
-/* === PARTICLES === */
-@keyframes particle-float-1 {
-  0%, 100% { transform: translateX(0) translateY(0); opacity: 0.3; }
-  50% { transform: translateX(100px) translateY(-10px); opacity: 0.8; }
-}
-
-@keyframes particle-float-2 {
-  0%, 100% { transform: translateX(0) translateY(0); opacity: 0.4; }
-  50% { transform: translateX(-80px) translateY(8px); opacity: 0.7; }
-}
-
-.particle-1 { animation: particle-float-1 6s ease-in-out infinite; }
-.particle-2 { animation: particle-float-2 8s ease-in-out infinite; }
 
 /* === NAV LINKS === */
 .nav-link {
