@@ -10,12 +10,18 @@
         
         <!-- Logo/Brand (même que navbar) -->
         <div class="flex items-center gap-3">
-          <div class="w-6 h-6 border-2 border-cyan-400 rounded-lg flex items-center justify-center">
-            <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
-          </div>
-          <span class="font-bold gradient-text font-mono text-sm">
-            ALEX.DEV
-          </span>
+            <div class="logo-wrapper">
+              <NuxtImg 
+                src="/images/logo-simple.webp"
+                alt="Nevezio logo"
+                width="333"
+                height="200"
+                format="webp"
+                class="logo-image"
+                loading="eager"
+                preload
+              />
+            </div>
         </div>
 
         <!-- Copyright -->
@@ -54,6 +60,16 @@
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
   overflow: hidden;
   margin-top: auto; /* Pour pousser le footer en bas */
+}
+
+/* === LOGO WRAPPER pour format horizontal 832x150 === */
+.logo-wrapper {
+  position: relative;
+  width: 66px;  
+  height: 40;  
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 /* === ANIMATED TECH BORDER (inverse de la nav) === */
