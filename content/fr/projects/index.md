@@ -20,15 +20,14 @@ projects:
     technologies: ["React", "JAVA 21", "Spring Boot"]
     image: "/images/projects/tcpl.png"
     github: "https://github.com/user/ecommerce"
-    status: "in-progress"
-    pdf:
-      title: "Documentation technique"
-      file: "/tcpl/app-presentation.pdf"
+    live: "https://tennis-club-de-landerneau.fr"
+    status: "completed"
+
     
   - title: "Site vitrine"
     description: "SPA pour le bar 'La cabane de Nonna' "
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
     image: "/images/projects/lcdn.jpg"
     github: "https://github.com/user/api"
-    status: "completed"
+    status: "in-progress"
 ---
