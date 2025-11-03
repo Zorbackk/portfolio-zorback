@@ -6,14 +6,13 @@ interface ProjectPdf {
 }
 
 interface Project {
+  slug: string; 
   title: string;
   description: string;
   image?: string;
   status: 'completed' | 'in-progress';
   technologies: string[];
-  github?: string;
-  live?: string;
-  pdf?: ProjectPdf; // ← Optionnel
+  pageLabel: string; 
 }
 
 interface PageData {
@@ -27,6 +26,7 @@ interface PageData {
 }
 
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // 🔧 Récupère le contenu selon la locale
 const { data: page, refresh } = await useAsyncData(`projects-${locale.value}`, () => {
@@ -67,10 +67,13 @@ useSeoMeta({
     <section class="py-16" v-if="page.projects && page.projects.length > 0">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div 
+          
+          <!-- Rend les cards cliquables -->
+          <NuxtLink
             v-for="(project, index) in (page.projects as Project[])" 
             :key="`project-${index}-${project.title}`"
-            class="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-shadow"
+            :to="localePath(`/projects/${project.slug}`)"
+            class="block bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
           >
             <!-- Image -->
             <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
@@ -88,80 +91,50 @@ useSeoMeta({
               <div class="absolute inset-0 bg-blue-600 opacity-0 hover:opacity-20 transition-opacity"></div>
             </div>
 
-            <!-- Content -->
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ project.title }}</h3>
-                <UBadge 
-                  :color="project.status === 'completed' ? 'green' : 'yellow'"
-                  size="xs"
-                >
-                  {{ project.status === 'completed' 
-                    ? (locale === 'fr' ? 'Terminé' : 'Completed') 
-                    : (locale === 'fr' ? 'En cours' : 'In Progress') 
-                  }}
-                </UBadge>
-              </div>
+<!-- Content -->
+<div class="p-6">
+  <div class="flex items-center justify-between mb-2">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ project.title }}</h3>
+    <UBadge 
+      :color="project.status === 'completed' ? 'green' : 'yellow'"
+      size="xs"
+    >
+      {{ project.status === 'completed' 
+        ? (locale === 'fr' ? 'Terminé' : 'Completed') 
+        : (locale === 'fr' ? 'En cours' : 'In Progress') 
+      }}
+    </UBadge>
+  </div>
 
-              <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{{ project.description }}</p>
+  <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{{ project.description }}</p>
 
-              <!-- Technologies -->
-              <div class="flex flex-wrap gap-2 mb-4">
-                <UBadge 
-                  v-for="(tech, techIndex) in project.technologies" 
-                  :key="`tech-${techIndex}-${tech}`"
-                  variant="soft"
-                  size="xs"
-                  color="blue"
-                >
-                  {{ tech }}
-                </UBadge>
-              </div>
+  <!-- Technologies -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    <UBadge 
+      v-for="(tech, techIndex) in project.technologies" 
+      :key="`tech-${techIndex}-${tech}`"
+      variant="soft"
+      size="xs"
+      color="blue"
+    >
+      {{ tech }}
+    </UBadge>
+  </div>
 
-              <!-- Links -->
-              <div class="flex flex-col gap-3">
-                <!-- Première ligne : GitHub + Live -->
-                <div class="flex gap-3">
-                  <UButton 
-                    v-if="project.github"
-                    :to="project.github"
-                    target="_blank"
-                    variant="outline"
-                    size="sm"
-                    icon="i-simple-icons-github"
-                    class="flex-1"
-                  >
-                    {{ locale === 'fr' ? 'Code' : 'Code' }}
-                  </UButton>
-
-                  <UButton 
-                    v-if="project.live"
-                    :to="project.live"
-                    target="_blank"
-                    size="sm"
-                    icon="i-heroicons-arrow-top-right-on-square"
-                    class="flex-1"
-                  >
-                    {{ locale === 'fr' ? 'Voir le site' : 'View Live' }}
-                  </UButton>
-                </div>
-
-                <!-- 🎯 Deuxième ligne : PDF (téléchargement uniquement) -->
-                <div v-if="project.pdf">
-                  <UButton 
-                    :to="project.pdf.file"
-                    target="_blank"
-                    size="sm"
-                    icon="i-heroicons-arrow-down-tray"
-                    class="w-full"
-                    color="green"
-                  >
-                   {{ locale === 'fr' ? 'Télécharger' : 'Download' }} {{ project.pdf.title }}
-                  </UButton>
-                </div>
-              </div>
+    <!-- Bouton "En savoir plus" -->
+  <UButton 
+    v-if="project.pageLabel"
+    :to="localePath(`/projects/${project.slug}`)"
+    variant="soft"
+    size="sm"
+    icon="i-heroicons-document-text"
+    color="primary"
+    block
+  >
+    {{ project.pageLabel }}
+  </UButton>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
     </section>
