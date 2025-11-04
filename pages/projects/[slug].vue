@@ -181,15 +181,15 @@ useSeoMeta({
             :key="index"
             class="space-y-3"
           >
-            <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-              <NuxtImg
-                :src="screenshot.image"
-                :alt="screenshot.title"
-                class="w-full h-auto"
-                width="600"
-                height="400"
-              />
-            </div>
+          <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
+            <NuxtImg
+              :src="screenshot.image"
+              :alt="screenshot.title"
+              class="w-full h-auto"
+              width="1912"
+              height="867"
+            />
+          </div>
             <div>
               <h3 class="font-semibold text-lg text-gray-900 dark:text-white">
                 {{ screenshot.title }}

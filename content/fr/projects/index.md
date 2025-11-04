@@ -20,8 +20,7 @@ projects:
     description: "API REST permettant la gestion d'articles, la saisie de résultat et la création de galeries photos pour un club de tennis"
     technologies: ["React", "JAVA 21", "Spring Boot"]
     image: "/images/projects/tcpl.png"
-    github: "https://github.com/user/ecommerce"
-    live: "https://tennis-club-de-landerneau.fr"
+    pageLabel: "En savoir plus"
     status: "completed"
 
     
@@ -30,6 +29,6 @@ projects:
     description: "SPA pour le bar 'La cabane de Nonna' "
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
     image: "/images/projects/lcdn.jpg"
-    github: "https://github.com/user/api"
+    pageLabel: "En savoir plus"
     status: "in-progress"
 ---
