@@ -69,7 +69,7 @@ useSeoMeta({
         :to="localePath('/projects')"
         variant="ghost"
         icon="i-heroicons-arrow-left"
-        class="mb-8"
+        class="mb-8 !ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
         size="lg"
       >
         {{ locale === 'fr' ? 'Retour aux projets' : 'Back to projects' }}
@@ -108,7 +108,8 @@ useSeoMeta({
             target="_blank"
             icon="i-heroicons-arrow-top-right-on-square"
             size="xl"
-            color="primary"
+            class="!ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
+            variant="outline"
           >
             {{ locale === 'fr' ? ' Voir le site' : ' View Live Site' }}
           </UButton>
@@ -119,6 +120,7 @@ useSeoMeta({
             target="_blank"
             icon="i-simple-icons-github"
             size="xl"
+            class="!ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
             variant="outline"
           >
             {{ locale === 'fr' ? 'Code source' : 'Source Code' }}
@@ -130,7 +132,7 @@ useSeoMeta({
             target="_blank"
             icon="i-heroicons-arrow-down-tray"
             size="xl"
-            color="green"
+            class="!ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
             variant="outline"
           >
             {{ project.pdf.title }}
@@ -161,8 +163,7 @@ useSeoMeta({
             :key="tech"
             size="lg"
             variant="soft"
-            color="blue"
-            class="px-4 py-2 text-base"
+            class="px-4 py-2 text-base !ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
           >
             {{ tech }}
           </UBadge>
@@ -172,7 +173,6 @@ useSeoMeta({
       <!-- ==================== GALERIE DE SCREENSHOTS ==================== -->
       <section v-if="project.screenshots && project.screenshots.length > 0" class="mb-16">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-          <UIcon name="i-heroicons-photo" class="text-purple-500" />
           {{ locale === 'fr' ? 'Captures d\'écran' : 'Screenshots' }}
         </h2>
         <div class="grid md:grid-cols-2 gap-8">
@@ -205,17 +205,16 @@ useSeoMeta({
       <!-- ==================== FONCTIONNALITÉS ==================== -->
       <section v-if="project.features && project.features.length > 0" class="mb-16">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-          <UIcon name="i-heroicons-sparkles" class="text-yellow-500" />
           {{ locale === 'fr' ? 'Fonctionnalités principales' : 'Key Features' }}
         </h2>
         <div class="grid md:grid-cols-2 gap-6">
           <div
             v-for="(feature, index) in project.features"
             :key="index"
-            class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-800"
+            class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-blue-200 dark:border-green-500"
           >
             <div class="flex items-start gap-4">
-              <div class="flex-shrink-0 w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+              <div class="flex-shrink-0 w-10 h-10 bg-blue-500 dark:bg-green-500 rounded-lg flex items-center justify-center">
                 <UIcon name="i-heroicons-check" class="text-white text-xl" />
               </div>
               <div>
@@ -286,7 +285,6 @@ useSeoMeta({
           <!-- Défis techniques -->
           <div v-if="project.otherInfo.challenges && project.otherInfo.challenges.length > 0" class="p-6 border-t border-gray-200 dark:border-gray-700">
             <h3 class="font-semibold text-lg text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <UIcon name="i-heroicons-light-bulb" class="text-yellow-500" />
               {{ locale === 'fr' ? 'Défis techniques' : 'Technical Challenges' }}
             </h3>
             <ul class="space-y-2">
@@ -304,7 +302,7 @@ useSeoMeta({
           <!-- Résultats -->
           <div v-if="project.otherInfo.results && project.otherInfo.results.length > 0" class="p-6 border-t border-gray-200 dark:border-gray-700">
             <h3 class="font-semibold text-lg text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <UIcon name="i-heroicons-trophy" class="text-green-500" />
+          
               {{ locale === 'fr' ? 'Résultats' : 'Results' }}
             </h3>
             <div class="grid md:grid-cols-3 gap-4">
@@ -322,14 +320,14 @@ useSeoMeta({
       </section>
 
       <!-- ==================== CTA FINAL ==================== -->
-      <section class="mt-16 p-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl text-center text-white">
+      <section class="mt-16 p-8 bg-gradient-to-r bg-gray-800 dark:bg-gray-800 rounded-2xl text-center text-white">
         <h3 class="text-2xl font-bold mb-4">
           {{ locale === 'fr' ? 'Intéressé par ce projet ?' : 'Interested in this project?' }}
         </h3>
         <p class="mb-6 text-blue-100">
           {{ locale === 'fr' 
-            ? 'N\'hésitez pas à découvrir le site en ligne ou à consulter le code source.' 
-            : 'Feel free to check out the live site or browse the source code.' 
+            ? 'N\'hésitez pas à découvrir le site en ligne.' 
+            : 'Feel free to check out the live site.' 
           }}
         </p>
         <div class="flex flex-wrap justify-center gap-4">
@@ -339,20 +337,10 @@ useSeoMeta({
             target="_blank"
             icon="i-heroicons-arrow-top-right-on-square"
             size="xl"
-            color="white"
+            variant="outline"
+            class="!ring-blue-500 !text-blue-600 hover:!bg-green-50 dark:!ring-green-500 dark:!text-green-400 dark:hover:!bg-green-950"
           >
             {{ locale === 'fr' ? 'Voir le site' : 'View Live' }}
-          </UButton>
-          <UButton
-            v-if="project.github"
-            :to="project.github"
-            target="_blank"
-            icon="i-simple-icons-github"
-            size="xl"
-            variant="outline"
-            color="white"
-          >
-            {{ locale === 'fr' ? 'Code source' : 'Source Code' }}
           </UButton>
         </div>
       </section>

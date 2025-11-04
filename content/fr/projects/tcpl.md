@@ -9,7 +9,7 @@ technologies:
   - "Front-end : React 19 et Mantine 8"
   - "Backend : Java 21 et Spring Boot"
   - "Base de données : MariaDB"
-  - "Déploiement : Docker and PowerShell"
+  - "Déploiement : Docker et PowerShell"
   - "IDEs : VSCode et IntelliJ"
   - "Autres outils notables : LiberKey, Laragon, Cmdr, GitHub"
 
@@ -68,24 +68,21 @@ features:
 
 # Autres informations
 otherInfo:
-  year: ""
-  duration: ""
-  team: ""
-  role: ""
-  client: ""
+  year: "2025"
+  duration: "8 mois"
+  team: "Solo"
+  role: "Développeur Fullstack"
+  client: "Tennis club de Landerneau"
   
   challenges:
-    - ""
-    - ""
-    - ""
-    - ""
-    - "Le déploiement a été un véritable challenge car c'était la première fois que je mettais en ligne une application de cette taile. Il a donc été effectué sur un serveur virtuel via la conteneurisation dans Docker préalablement installé dans le VPS."
+    - "L'ensemble du projet a été un rude parcours car étant mon projet de fin de formation, c'était la première fois que j'ai eu à gérer une application sur l'ensemble des stades de son développement."
+    - "La conceptualisation et la modélisation ont été un premier enjeu de taille car ces étapes ont déterminé la direction que je devais prendre pour la suite de projet."
+    - "La réalisation du backend a été également un moment relevé car il me fallait prendre en main Java et Spring Boot tout en devant tâchant de réaliser au mieux la structure que j'avais établi à l'étape précédente. "
+    - "Le passage au front-end fut également un challenge de taille car il fallait faire le faire communiquer avec la base de données via mon backend. J'ai également découvert l'utilisation de React durant cette étape."
+    - "Le déploiement a été un véritable challenge car c'était la première fois que je mettais en ligne une application de cette taille. Il a été effectué sur un serveur virtuel via la conteneurisation de l'application avec Docker, préalablement installé dans le VPS."
   
   results:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+    - "Application en ligne"
+    - "Challenges techniques relevés"
+    - "Apprentissage de plusieurs nouvelles technologies"
 ---
