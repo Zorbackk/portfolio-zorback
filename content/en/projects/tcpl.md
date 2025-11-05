@@ -2,7 +2,7 @@
 title: "Complete Fullstack Application"
 intro: "As part of my final training internship, my project was to create the website for the tennis club where I am a member. This project was carried out between February 2025 and November 2025. Initially, the project duration was supposed to align with the internship period, which was 10 weeks, from mid-February 2025 to mid-May 2025. However, I continued to develop this project until"
 teamWork: "I completed this project alone from the design phase to modeling, from backend development to front-end implementation, and then to deployment setup. I also did part of the web content writing for the site."
-image: "/images/projects/"
+image: "/images/projects/tcpl.png"
 status: "completed"
 
 technologies:
@@ -67,24 +67,22 @@ features:
 
 # Autres informations
 otherInfo:
-  year: ""
-  duration: ""
-  team: ""
-  role: ""
-  client: ""
+  year: "2025"
+  duration: "8 months"
+  team: "Solo"
+  role: "Fullstack developer"
+  client: "Tennis club de Landerneau"
   
   challenges:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+    - "This project being the first to be carried out from start to finish of its development, I experienced several peaks of difficulty such as those described below."
+    - "The conceptualization and modeling were a first major challenge because these steps determined the direction I had to take for the rest of the project."
+    - "The backend development was also a difficult moment because I had to get to grips with Java and Spring Boot while having to implement as best as possible the structure I had established in the previous step."
+    - "Moving to the front-end was also a significant challenge because it had to communicate with the database via my backend. I also discovered the use of React during this step."
+    - "Deployment was a real challenge because it was the first time I put online an application of this size. It was deployed on a virtual server via containerization of the application with Docker, previously installed on the VPS."
   
   results:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+    - "Website online"
+    - "Technical challenges done"
+    - "Learning several new technologies"
+
 ---

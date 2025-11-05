@@ -15,6 +15,7 @@ const { data: servicesData, refresh: refreshServices } = await useAsyncData(`ser
 // 🎯 Recharge quand la langue change
 watch(locale, async () => {
   await refresh()
+  await refreshServices()
 })
 
 if (!page.value) {

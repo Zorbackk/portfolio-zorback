@@ -66,21 +66,6 @@ skills:
         - name: "MariaDB"
           level: 75
           
-    - name: "Outils"
-      icon: "i-heroicons-cog-6-tooth"
-      color: "purple"
-      items:
-        - name: "Docker"
-          level: 60
-        - name: "Git"
-          level: 90
-        - name: "CI/CD"
-          level: 75
-        - name: "OVH"
-          level: 70
-        - name: "Laragon"
-          level: 80
-          
     - name: "Tools"
       icon: "i-heroicons-cog-6-tooth"
       color: "purple"
@@ -129,7 +114,7 @@ hobbies:
       icon: "i-heroicons-heart"
       description: "Tennis lover"
       
-    - name: "Lecture"
+    - name: "Reading"
       icon: "i-heroicons-book-open"
       description: "Science fiction addict"
 
