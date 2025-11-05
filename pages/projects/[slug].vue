@@ -145,7 +145,7 @@ useSeoMeta({
         <NuxtImg
           :src="project.image"
           :alt="project.title"
-          class="w-full h-auto"
+          class="w-full h-full"
           width="1200"
           height="600"
         />
