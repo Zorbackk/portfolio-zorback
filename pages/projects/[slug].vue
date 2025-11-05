@@ -141,16 +141,21 @@ useSeoMeta({
       </div>
 
       <!-- ==================== IMAGE PRINCIPALE ==================== -->
-      <div class="rounded-2xl overflow-hidden shadow-2xl mb-16 border-4 border-gray-200 dark:border-gray-700">
-        <NuxtImg
-          :src="project.image"
-          :alt="project.title"
-          class="w-full h-full"
-          width="1200"
-          height="600"
-        />
-      </div>
-
+<div class="mb-16">
+  <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-200 dark:border-gray-700">
+    <div class="aspect-[2/1] w-full">
+      <NuxtImg
+        :src="project.image"
+        :alt="project.title"
+        class="w-full h-full object-cover"
+        width="1200"
+        height="600"
+        loading="eager"
+        format="webp"
+      />
+    </div>
+  </div>
+</div>
       <!-- ==================== TECHNOLOGIES ==================== -->
       <section class="mb-16">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
