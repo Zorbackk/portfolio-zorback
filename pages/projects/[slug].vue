@@ -242,28 +242,28 @@ useSeoMeta({
           <!-- Infos générales en grille -->
           <div class="grid md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700">
             <div v-if="project.otherInfo.year" class="p-6 text-center">
-              <div class="text-3xl font-bold text-blue-500 mb-2">{{ project.otherInfo.year }}</div>
+              <div class="text-2xl font-bold text-blue-500 mb-2">{{ project.otherInfo.year }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400">
                 {{ locale === 'fr' ? 'Année' : 'Year' }}
               </div>
             </div>
             
             <div v-if="project.otherInfo.duration" class="p-6 text-center">
-              <div class="text-3xl font-bold text-purple-500 mb-2">{{ project.otherInfo.duration }}</div>
+              <div class="text-2xl font-bold text-purple-500 mb-2">{{ project.otherInfo.duration }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400">
                 {{ locale === 'fr' ? 'Durée' : 'Duration' }}
               </div>
             </div>
             
             <div v-if="project.otherInfo.team" class="p-6 text-center">
-              <div class="text-3xl font-bold text-green-500 mb-2">{{ project.otherInfo.team }}</div>
+              <div class="text-2xl font-bold text-green-500 mb-2">{{ project.otherInfo.team }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400">
                 {{ locale === 'fr' ? 'Équipe' : 'Team' }}
               </div>
             </div>
             
             <div v-if="project.otherInfo.role" class="p-6 text-center">
-              <div class="text-lg font-bold text-orange-500 mb-2">{{ project.otherInfo.role }}</div>
+              <div class="text-xl font-bold text-orange-500 mb-2">{{ project.otherInfo.role }}</div>
               <div class="text-sm text-gray-600 dark:text-gray-400">
                 {{ locale === 'fr' ? 'Rôle' : 'Role' }}
               </div>
