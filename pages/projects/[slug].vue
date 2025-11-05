@@ -43,10 +43,15 @@ const slug = route.params.slug as string
 
 // 📌 Récupère le projet détaillé
 const { data: project } = await useAsyncData(
-  `project-${slug}-${locale.value}`,
-  () => queryContent(`/${locale.value}/projects/${slug}`).findOne()
-) as { data: Ref<ProjectDetail> }
+  `project-${slug}-${locale.value}`, // Clé unique par langue
+  () => queryContent(`/${locale.value}/projects/${slug}`).findOne(),
+  {
+    watch: [locale], // 🔄 Recharge quand la locale change
+    server: true
+  }
+)
 
+// Vérification d'erreur
 if (!project.value) {
   throw createError({
     statusCode: 404,
