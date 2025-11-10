@@ -3,7 +3,7 @@ title: ""
 intro: ""
 teamWork: ""
 image: "/images/projects/"
-status: "completed"
+status: "in-progress"
 
 technologies:
   - ""

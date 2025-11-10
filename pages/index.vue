@@ -27,8 +27,8 @@ useSeoMeta({
 
 <template> 
   <div v-if="page">
-    <!-- 🔥 HERO SECTION TECH - SANS PARTICULES -->
-    <section class="relative min-h-screen tech-bg grid-pattern flex items-center overflow-hidden">
+    <!-- HERO SECTION  -->
+    <section class="relative min-h-screen pt-12 md:pt-16 tech-bg grid-pattern flex items-center overflow-hidden">
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
           
@@ -56,11 +56,8 @@ useSeoMeta({
           <!-- Titre avec effet tech -->
           <div class="mb-8">
             
-            <h1 class="font-tech text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-              {{ locale === 'fr' ? 'Salut, c\'est' : 'Hi, I\'m' }} 
-              <span class="gradient-text pulse-neon">
-                {{ page.hero?.name || 'Alex' }}
-              </span>
+            <h1 class="font-tech text-2xl md:text-5xl lg:text-5xl font-bold mb-4">
+              {{ locale === 'fr' ? 'Bienvenue sur mon portfolio' : 'Welcome on my portfolio' }} 
   
             </h1>
             
@@ -74,15 +71,15 @@ useSeoMeta({
 
           <!-- Subtitle Tech -->
 <h2 class="font-tech text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
-  <span class="text-purple-400">></span> {{ page.hero?.title || 'Développeur Full-Stack' }}
+  <span class="text-purple-400">></span> {{ page.hero?.name || 'Alex' }}
 </h2>
 
 <p class="font-mono text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-  {{ page.hero?.description || 'Passionné par la création d\'expériences web modernes' }}
+  {{ page.hero?.title || 'Passionné par la création d\'expériences web modernes' }}
 </p>
 
           <!-- Boutons Tech -->
-<div class="flex flex-col sm:flex-row gap-6 justify-center mb-12" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
+<div class="flex flex-col sm:flex-row gap-6 justify-center mb-8" v-if="page.hero?.buttons && page.hero.buttons.length > 0">
 <UButton 
   v-for="(button, index) in page.hero.buttons"
   :key="index"
@@ -132,13 +129,18 @@ useSeoMeta({
     </section>
 
     <!-- 🔧 TECHNOLOGIES SECTION AVEC COMPONENT -->
-<section class="py-20 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
+<section class="pb-20 pt-12 tech-bg" v-if="page.technologies?.items && page.technologies.items.length > 0">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
       <h2 class="font-tech text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
         {{ page.technologies?.title || 'Technologies' }}
       </h2>
-      <div class="w-24 h-px bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto"></div>
+                  <!-- Ligne de séparation tech -->
+            <div class="flex justify-center items-center space-x-4 mb-6">
+              <div class="h-px w-20 bg-gradient-to-r from-transparent to-cyan-400"></div>
+              <div class="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+              <div class="h-px w-20 bg-gradient-to-l from-transparent to-purple-400"></div>
+            </div>
     </div>
         
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
