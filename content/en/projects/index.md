@@ -11,17 +11,16 @@ projects:
     title: "Personal Portfolio"
     description: "Portfolio developed with Nuxt 3 and Vue.js"
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
-    image: "/images/projects/portfolio.jpg"
-    pageLabel: "Learn more"
+    image: "/images/projects/portfolio/logo-simple.webp"
+    pageLabel: "View more"
     status: "completed"
     
   - slug : "tcpl"
     title: "Fullstack application"
     description: "REST API for article management, result entry, and photo gallery creation"
     technologies: ["React", "JAVA 21", "Spring Boot"]
-    image: "/images/projects/tcpl.png"
-    github: "https://github.com/user/ecommerce"
-    live: "https://tennis-club-de-landerneau.fr"
+    image: "/images/projects/tcpl/tcpl.png"
+    pageLabel: "View more"
     status: "completed"
 
     
@@ -29,8 +28,8 @@ projects:
     title: "showcase website"
     description: "SPA for 'La cabane de Nonna' "
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
-    image: "/images/projects/lcdn.jpg"
-    github: "https://github.com/user/api"
+    image: "/images/projects/lcdn/logo-hero.webp"
+    pageLabel: "View more"
     status: "in-progress"
 
 ---

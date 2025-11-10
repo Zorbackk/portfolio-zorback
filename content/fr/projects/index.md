@@ -11,7 +11,7 @@ projects:
     title: "Portfolio Personnel"
     description: "Portfolio développé avec Nuxt 3 et Vue.js"
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
-    image: "/images/projects/portfolio.jpg"
+    image: "/images/projects/portfolio/logo-simple.webp"
     pageLabel: "En savoir plus"
     status: "completed"
     
@@ -19,7 +19,7 @@ projects:
     title: "Application Fullstack complète "
     description: "API REST permettant la gestion d'articles, la saisie de résultat et la création de galeries photos pour un club de tennis"
     technologies: ["React", "JAVA 21", "Spring Boot"]
-    image: "/images/projects/tcpl.png"
+    image: "/images/projects/tcpl/tcpl.png"
     pageLabel: "En savoir plus"
     status: "completed"
 
@@ -28,7 +28,7 @@ projects:
     title: "Site vitrine"
     description: "SPA pour le bar 'La cabane de Nonna' "
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
-    image: "/images/projects/lcdn.jpg"
+    image: "/images/projects/lcdn/logo-hero.webp"
     pageLabel: "En savoir plus"
     status: "in-progress"
 ---

@@ -73,7 +73,7 @@ useSeoMeta({
             v-for="(project, index) in (page.projects as Project[])" 
             :key="`project-${index}-${project.title}`"
             :to="localePath(`/projects/${project.slug}`)"
-            class="block bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+  class="flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
           >
             <!-- Image -->
             <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
@@ -92,7 +92,7 @@ useSeoMeta({
             </div>
 
 <!-- Content -->
-<div class="p-6">
+<div class="p-6 flex flex-col flex-1">
   <div class="flex items-center justify-between mb-2">
     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ project.title }}</h3>
     <UBadge 
@@ -122,18 +122,20 @@ useSeoMeta({
   </div>
 
     <!-- Bouton "En savoir plus" -->
-  <UButton 
-    v-if="project.pageLabel"
-    :to="localePath(`/projects/${project.slug}`)"
-    variant="soft"
-    size="sm"
-    icon="i-heroicons-document-text"
-    color="primary"
-    block
-  >
-    {{ project.pageLabel }}
-  </UButton>
-            </div>
+    <div class="mt-auto">
+      <UButton 
+        v-if="project.pageLabel"
+        :to="localePath(`/projects/${project.slug}`)"
+        variant="soft"
+        size="sm"
+        icon="i-heroicons-document-text"
+        color="primary"
+        block
+      >
+        {{ project.pageLabel }}
+      </UButton>
+    </div>
+  </div>
           </NuxtLink>
         </div>
       </div>
