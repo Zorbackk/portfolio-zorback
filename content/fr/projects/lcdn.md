@@ -54,24 +54,17 @@ features:
 
 # Autres informations
 otherInfo:
-  year: ""
-  duration: ""
-  team: ""
-  role: ""
-  client: ""
+  year: "2025"
+  duration: "1 mois"
+  team: "Solo"
+  role: "Développeur frontend"
+  client: "La cabane de Nonna"
   
   challenges:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+    - "Le principal défi du projet a été l'intégration dynamique des cards pour les événements."
+    - "Il m'a fallu trouver une solution technique que je n'avais jamais exploité en allant récupérer les données d'un événement créé sur Google Agenda."
+    - "La mise en place de cette solution a été compliqué mais extrêmement satisfaisante une fois fonctionnel."
   
   results:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+
 ---

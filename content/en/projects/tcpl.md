@@ -2,7 +2,7 @@
 title: "Complete Fullstack Application"
 intro: "As part of my final training internship, my project was to create the website for the tennis club where I am a member. This project was carried out between February 2025 and November 2025. Initially, the project duration was supposed to align with the internship period, which was 10 weeks, from mid-February 2025 to mid-May 2025. However, I continued to develop this project until"
 teamWork: "I completed this project alone from the design phase to modeling, from backend development to front-end implementation, and then to deployment setup. I also did part of the web content writing for the site."
-image: "/images/projects/tcpl.png"
+image: "/images/projects/tcpl/tcpl.png"
 status: "completed"
 
 technologies:

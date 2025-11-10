@@ -2,7 +2,7 @@
 title: "Application Fullstack complète"
 intro: "Dans le cadre de mon stage de fin de formation, mon projet a été de réaliser le site internet du club de tennis dans lequel je suis adhérent. Ce projet s'est réalisé entre février 2025 et novembre 2025. Initialement, la durée du projet devait se caler sur le temps de stage soit 10 semaines, de mi-février 2025 à mi-mai 2025. Cependant, j'ai continué à développer ce projet jusqu'au"
 teamWork: "J'ai réalisé ce projet seul de la phase de conception à la modélisation, du développement du backend à la réalisation du front-end, puis à la mise en place du déploiement. J'ai également réalisé une partie de la rédaction web du site."
-image: "/images/projects/tcpl.png"
+image: "/images/projects/tcpl/tcpl.png"
 status: "completed"
 
 technologies:
