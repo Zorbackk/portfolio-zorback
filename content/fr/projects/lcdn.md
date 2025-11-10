@@ -43,29 +43,14 @@ screenshots:
 
 #  Fonctionnalités principales
 features:
-  - title: ""
-    description: ""
+  - title: "Mode clair/Mode sombre"
+    description: "Le site a été entièrement pensé avec un mode clair et un mode sombre personnalisé qui prendra compte des préférences des utilisateurs."
   
-  - title: ""
-    description: ""
+  - title: "Mode Français/Mode Anglais"
+    description: "Du fait de la présence de nombreux touristes anglophones durant la période estivale, le site dispose d'un switch permettant d'accéder un contenu entièrement traduit en français et en anglais."
   
-  - title: ""
-    description: ""
-  
-  - title: ""
-    description: ""
-  
-  - title: ""
-    description: ""
-  
-  - title: ""
-    description: ""
-  
-  - title: ""
-    description: ""
-  
-  - title: ""
-    description: ""
+  - title: "Carte dynamique des événements"
+    description: "La section 'Nos événements' du site récupère dynamiquement les données de l'agenda Google de la cliente et vient créer une carte à partir de ces données. Sont ainsi récupérées les informations suivantes : titre de l'événement, photo de couverture, date et heure de l'événement et une description succincte de ce dernier"
 
 # Autres informations
 otherInfo:
