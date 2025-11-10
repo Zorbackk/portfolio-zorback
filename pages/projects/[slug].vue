@@ -51,6 +51,15 @@ const { data: project } = await useAsyncData(
   }
 )
 
+// Conditionnalité pour l'agencement des fonctionnalités et des screenshots
+const isLastScreenshotOdd = computed(() => 
+  project.value?.screenshots && project.value.screenshots.lenght % 2 !==0)
+
+
+const isLastFeatureOdd = computed(() => 
+  project.value?.features && project.value.features.length % 2 !== 0
+)
+
 // Vérification d'erreur
 if (!project.value) {
   throw createError({
@@ -189,7 +198,12 @@ useSeoMeta({
           <div
             v-for="(screenshot, index) in project.screenshots"
             :key="index"
-            class="space-y-3"
+            :class="[
+              'space-y-3',
+              index === project.screenshots.length - 1 && project.screenshots.length % 2 !== 0
+                ? 'md:col-span-2 md:max-w-2xl md:mx-auto'
+                : ''
+            ]"
           >
           <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
             <NuxtImg
@@ -221,7 +235,12 @@ useSeoMeta({
           <div
             v-for="(feature, index) in project.features"
             :key="index"
-            class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-blue-200 dark:border-green-500"
+              :class="[
+              'p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-blue-200 dark:border-green-500',
+              index === project.features.length - 1 && project.features.length % 2 !== 0
+                ? 'md:col-span-2 md:max-w-2xl md:mx-auto'
+                : ''
+            ]"
           >
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 w-10 h-10 bg-blue-500 dark:bg-green-500 rounded-lg flex items-center justify-center">
