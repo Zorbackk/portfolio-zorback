@@ -1,6 +1,6 @@
 ---
 hero:
-  name: "Alexandre"
+  name: "Alexandre WIEMANN"
   title: "Développeur web Full-Stack"
   description: "Découvrez mon portfolio"
   image: "/images/PP.jpg"
