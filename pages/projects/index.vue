@@ -54,7 +54,7 @@ useSeoMeta({
 <template>
   <div class="min-h-screen" v-if="page">
     <!-- Hero Section -->
-    <section class="py-20 text-center">
+    <section class="pt-16 pb-8 text-center">
       <div class="container mx-auto px-4">
         <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{{ page.hero?.title }}</h1>
         <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -73,10 +73,10 @@ useSeoMeta({
             v-for="(project, index) in (page.projects as Project[])" 
             :key="`project-${index}-${project.title}`"
             :to="localePath(`/projects/${project.slug}`)"
-  class="flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+  class="flex flex-col bg-gray-200 dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer"
           >
             <!-- Image -->
-            <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+            <div class="h-60 bg-gray-100 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
               <NuxtImg 
                 v-if="project.image"
                 :src="project.image"
@@ -129,7 +129,7 @@ useSeoMeta({
         variant="soft"
         size="sm"
         icon="i-heroicons-document-text"
-        color="primary"
+        class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-green-600 dark:hover:bg-green-700 text-white dark:text-dark"
         block
       >
         {{ project.pageLabel }}

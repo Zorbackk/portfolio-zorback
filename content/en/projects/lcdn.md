@@ -54,24 +54,17 @@ features:
 
 # Autres informations
 otherInfo:
-  year: ""
-  duration: ""
-  team: ""
-  role: ""
-  client: ""
+  year: "2025"
+  duration: "1 week"
+  team: "Solo"
+  role: "Frontend Developer"
+  client: "La cabane de Nonna"
   
   challenges:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+    - "The main challenge of the project was the dynamic integration of event cards."
+    - "I had to find a technical solution I had never used before by retrieving data from an event created on Google Calendar."
+    - "Implementing this solution was complicated but extremely satisfying once it was working."
   
   results:
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
-    - ""
+
 ---

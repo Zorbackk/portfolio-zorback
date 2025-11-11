@@ -11,7 +11,7 @@ projects:
     title: "Portfolio Personnel"
     description: "Portfolio développé avec Nuxt 3 et Vue.js"
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
-    image: "/images/projects/portfolio/logo-simple.webp"
+    image: "/images/projects/portfolio/logo-simple.png"
     pageLabel: "En savoir plus"
     status: "completed"
     

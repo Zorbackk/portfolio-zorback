@@ -55,7 +55,7 @@ features:
 # Autres informations
 otherInfo:
   year: "2025"
-  duration: "1 mois"
+  duration: "1 semaine"
   team: "Solo"
   role: "Développeur frontend"
   client: "La cabane de Nonna"
