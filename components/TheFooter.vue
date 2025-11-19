@@ -1,6 +1,6 @@
 <template>
   <footer class="tech-footer-with-border">
-    <!-- 🌊 BORDER TECH ANIMÉ (en haut) -->
+    <!-- BORDER TECH ANIMÉ (en haut) -->
     <div class="footer-border-container">
       <div class="footer-tech-border"></div>
     </div>
@@ -33,17 +33,20 @@
     <span class="hover:text-purple-400 transition-colors duration-300">
       - {{ $t('footer.rights') }}
     </span>
+    <span class="hover:text-purple-400 transition-colors duration-300">
+      - {{ $t('footer.chrysalide') }}
+    </span>
         </div>
 
         <!-- Social/Tech indicator -->
-        <div class="flex items-center gap-2">
-          <div class="flex items-center gap-1 text-xs text-gray-500 font-mono">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span class="hover:text-green-400 transition-colors duration-300">
-              ONLINE
-            </span>
-          </div>
-        </div>
+<div class="flex items-center gap-2">
+  <NuxtLink 
+    to="/legal-notices" 
+    class="text-sm font-mono text-gray-400 hover:text-gray-700 transition-colors duration-300"
+  >
+    Mentions légales
+  </NuxtLink>
+</div>
       </div>
 
     </div>
@@ -59,10 +62,10 @@
   border-top: 2px solid rgba(0, 245, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
   overflow: hidden;
-  margin-top: auto; /* Pour pousser le footer en bas */
+  margin-top: auto;
 }
 
-/* === LOGO WRAPPER pour format horizontal 832x150 === */
+
 .logo-wrapper {
   position: relative;
   width: 66px;  
@@ -72,14 +75,14 @@
   overflow: hidden;
 }
 
-/* === ANIMATED TECH BORDER (inverse de la nav) === */
+
 .footer-tech-border {
   position: absolute;
   top: 0;
   right: 0;
   width: 150px;
   height: 2px;
-  background: linear-gradient(270deg, /* Direction inversée */
+  background: linear-gradient(270deg, 
     transparent 0%, 
     #a855f7 15%,
     #a855f7 20%,
@@ -94,7 +97,7 @@
     transparent 100%
   );
   animation: footer-border-pulse 8s ease-in-out infinite;
-  animation-delay: 2s; /* Décalage par rapport à la nav */
+  animation-delay: 2s; 
   box-shadow: 
     0 0 8px rgba(168, 85, 247, 0.4),
     0 -2px 15px rgba(0, 245, 255, 0.2);
@@ -117,7 +120,7 @@
   }
 }
 
-/* === GRADIENT TEXT === */
+
 .gradient-text {
   background: linear-gradient(135deg, #00f5ff 0%, #a855f7 100%);
   background-clip: text;
@@ -126,7 +129,7 @@
 }
 
 
-/* === RESPONSIVE === */
+
 @media (max-width: 768px) {
   .footer-tech-border {
     width: 100px;
