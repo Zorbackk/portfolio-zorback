@@ -30,5 +30,5 @@ projects:
     technologies: ["Vue.js", "Nuxt", "TypeScript"]
     image: "/images/projects/lcdn/logo-hero.webp"
     pageLabel: "En savoir plus"
-    status: "in-progress"
+    status: "completed"
 ---

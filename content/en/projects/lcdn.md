@@ -3,7 +3,7 @@ title: "Showcase website"
 intro: "This project was designed for a bar-tabac that regularly hosts events on its premises."
 teamWork: "This website is a single-page application (SPA) to optimize performance."
 image: "/images/projects/lcdn/logo-hero.webp"
-status: "in-progress"
+status: "completed"
 
 technologies:
   - "Vue.js"
@@ -12,11 +12,11 @@ technologies:
   - "Google Cloud"
 
 github: ""
-live: ""
+live: "https://lacabanedenonna.bzh/"
 
 pdf:
-  title: "Website still in development"
-  file: "/tcpl/"
+  title: ""
+  file: ""
 
 # Galerie de screenshots
 screenshots:
