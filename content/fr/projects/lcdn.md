@@ -3,7 +3,7 @@ title: "Site vitrine"
 intro: "Ce projet a été conçu pour un bar-tabac qui propose régulièrement des événements dans ses murs."
 teamWork: "Ce site est une single page application (SPA) afin d'en optimiser les performances"
 image: "/images/projects/lcdn/logo-hero.webp"
-status: "in-progress"
+status: "completed"
 
 technologies:
   - "Vue.js"
@@ -13,10 +13,10 @@ technologies:
 
 
 github: ""
-live: ""
+live: "https://lacabanedenonna.bzh/"
 
 pdf:
-  title: "Site toujours en développement"
+  title: ""
   file: ""
 
 # Galerie de screenshots
