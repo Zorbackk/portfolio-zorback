@@ -33,10 +33,10 @@ projects:
     status: "completed"
 
     
-  - slug: "rdr"
+  - slug: "route-du-rome"
     title: "Modernisation d'une application web"
-    description: "Application web  interactive pour France Travail Ille-et-Vilaine "
-    technologies: ["JavaScript", "Vite", "TypeScript"]
+    description: "Application web  interactive pour France Travail Ille-et-Vilaine - reconstruit de zéro sans framework"
+    technologies: ["TypeScript", "Vite", "Vanilla JS"]
     image: "/images/projects/rdr/rdr-thumbnail.webp"
     pageLabel: "En savoir plus"
     status: "completed"

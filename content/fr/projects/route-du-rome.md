@@ -1,8 +1,8 @@
 ---
 title: "Modernisation d'une application web interactive"
-intro: "Dans le cadre de mon ECF de fin de formation, j'ai modernisé La Route du Rome, une application web interactive réalisée par France Travail Ille-et-Vilaine. L'application existante fonctionnait mais reposait sur un code monolithique non structuré, non testé et difficile à maintenir. Ma mission a été de refondre entièrement le code sans rien changer pour l'utilisateur, en appliquant une architecture en couches, les principes SOLID, TypeScript et une stratégie de tests. Le projet s'est déroulé de juin à août 2026."
+intro: "Dans le cadre de ma formation Concepteur Développeur d'Applications, j'ai modernisé La Route du Rome, une application web interactive réalisée par France Travail Ille-et-Vilaine. L'application existante fonctionnait mais reposait sur un code monolithique non structuré, non testé et difficile à maintenir. Ma mission a été de refondre entièrement le code sans rien changer pour l'utilisateur, en appliquant une architecture en couches, les principes SOLID, TypeScript et une stratégie de tests. Le projet s'est déroulé de juin à août 2026."
 teamWork: "J'ai réalisé ce projet seul, de la phase d'analyse de l'existant et de conception à l'implémentation, des tests à la livraison. J'ai également rédigé l'intégralité de la documentation technique du projet."
-image: "/images/projects/route-du-rome/route-du-rome.png"
+image: "/images/projects/rdr/route-du-rome-fr.webp"
 status: "completed"
 
 technologies:
@@ -16,25 +16,24 @@ technologies:
   - "IDE : VS Code"
   - "Autres outils notables : GitHub, PlantUML"
 
-github: "répertoire privé"
 live: "https://route-du-rome-delta.vercel.app/"
 
 # Galerie de screenshots
 screenshots:
   - title: "Écran de sélection du guide"
-    image: "/images/projects/route-du-rome/selection-heros.webp"
+    image: "/images/projects/rdr/selection-heros.webp"
     description: ""
 
   - title: "Carte interactive d'Ille-et-Vilaine"
-    image: "/images/projects/route-du-rome/carte.webp"
+    image: "/images/projects/rdr/carte.webp"
     description: ""
 
   - title: "Dialogue avec un NPC"
-    image: "/images/projects/route-du-rome/dialogue.webp"
+    image: "/images/projects/rdr/dialogue.webp"
     description: ""
 
   - title: "Carnet de bord"
-    image: "/images/projects/route-du-rome/carnet-de-bord.webp"
+    image: "/images/projects/rdr/carnet-de-bord.webp"
     description: ""
 
 # Fonctionnalités principales
