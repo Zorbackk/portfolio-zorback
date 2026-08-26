@@ -205,16 +205,14 @@ useSeoMeta({
                 : ''
             ]"
           >
-          <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
+          <div class="rounded-xl overflow-hidden h-64 md:h-80">
             <NuxtImg
               :src="screenshot.image"
               :alt="screenshot.title"
-              class="w-full h-auto"
-              width="1912"
-              height="867"
+              class="w-full h-full object-contain"
             />
           </div>
-            <div>
+            <div class="text-center">
               <h3 class="font-semibold text-lg text-gray-900 dark:text-white">
                 {{ screenshot.title }}
               </h3>
