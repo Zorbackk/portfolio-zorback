@@ -32,4 +32,13 @@ projects:
     pageLabel: "View more"
     status: "completed"
 
+
+  - slug: "route-du-rome"
+    title: "Web Application Modernisation"
+    description: "Interactive web application for France Travail Ille-et-Vilaine — rebuilt from scratch without any framework"
+    technologies: ["TypeScript", "Vite", "Vanilla JS"]
+    image: "/images/projects/rdr/rdr-thumbnail.webp"
+    pageLabel: "Learn more"
+    status: "completed"
+
 ---
