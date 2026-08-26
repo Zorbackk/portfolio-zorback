@@ -31,4 +31,14 @@ projects:
     image: "/images/projects/lcdn/logo-hero.webp"
     pageLabel: "En savoir plus"
     status: "completed"
+
+    
+  - slug: "rdr"
+    title: "Modernisation d'une application web"
+    description: "Application web  interactive pour France Travail Ille-et-Vilaine "
+    technologies: ["JavaScript", "Vite", "TypeScript"]
+    image: "/images/projects/rdr/rdr-thumbnail.webp"
+    pageLabel: "En savoir plus"
+    status: "completed"
+
 ---
