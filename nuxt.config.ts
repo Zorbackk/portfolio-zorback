@@ -62,6 +62,7 @@ i18n: {
     fallback: 'dark'
   },
 
+  // Nuxt Img n'est plus provider - Fix pour avoir les images accessibles
   image: {
     provider: 'none',
     quality: 80,
