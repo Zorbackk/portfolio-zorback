@@ -63,6 +63,7 @@ i18n: {
   },
 
   image: {
+    provider: 'none',
     quality: 80,
     formats: ['webp', 'jpg'],
     screens: {
